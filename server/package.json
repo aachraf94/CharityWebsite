@@ -1,0 +1,44 @@
+{
+  "name": "charity",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon dbServer.js",
+    "devStartAutH": "nodemon authServer.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node dbServer.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@sendgrid/mail": "^7.7.0",
+    "bcrypt": "^5.1.0",
+    "bluebird": "^3.7.2",
+    "browserify-zlib": "^0.2.0",
+    "buffer": "^6.0.3",
+    "cloudinary": "^1.36.2",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "ejs": "^3.1.8",
+    "email-templates": "^11.0.3",
+    "express": "^4.18.2",
+    "express-fileupload": "^1.4.0",
+    "imgur": "^2.2.0",
+    "jsonwebtoken": "^9.0.0",
+    "jwt-decode": "^3.1.2",
+    "multer": "^1.4.5-lts.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.1.2",
+    "node-localstorage": "^2.2.1",
+    "nodemailer": "^6.9.1",
+    "pug": "^3.0.2",
+    "sharp": "^0.32.0",
+    "ws": "^8.13.0"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.3",
+    "nodemon": "^2.0.21"
+  }
+}
