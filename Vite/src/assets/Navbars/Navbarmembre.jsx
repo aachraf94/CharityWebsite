@@ -2,13 +2,11 @@ import Logo from '../FrontAssets/images1/LOGO.png';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import Cookies from "universal-cookie"
 
 
 const Navbarmembre = () => {
 
 
-  const cookies = new Cookies();
   const [url , setUrl ] =  useState("");
     useEffect(() => {
       
@@ -54,19 +52,25 @@ const Navbarmembre = () => {
     </div>
       <div className="  flex flex-row gap-4 justify-center font-ubuntu text-[17px] hidden md:flex" id="menu">
         <p className="mr-6">
-        <Link to="/Apropos" className=" text-[#F9DBBB] hover:text-gray-300 active:text-red-600 focus:text-red-600">A propos</Link>
+        <Link to="/Apropos" className=" text-[#F9DBBB] hover:text-gray-300 active:text-[#E53935] focus:text-[#E53935]">A propos</Link>
         </p>
         <p className="mr-6">
-        <Link to="/Evenements" className="text-[#F9DBBB] hover:text-gray-300 active:text-red-600 focus:text-red-600">Evenements</Link>
+        <Link to="/Evenements" className="text-[#F9DBBB] hover:text-gray-300 active:text-[#E53935] focus:text-[#E53935]">Evenements</Link>
         </p>
         <p className="mr-6">
-        <Link to="/NosBesoins" className=" text-[#F9DBBB] hover:text-gray-300 active:text-red-600 focus:text-red-600">Nos besoins</Link>
+        <Link to="/NosBesoins" className=" text-[#F9DBBB] hover:text-gray-300 active:text-[#E53935] focus:text-[#E53935]">Nos besoins</Link>
         </p>
         <p className="mr-6">
-        <Link to="/Blogs" className=" text-[#F9DBBB] hover:text-gray-300 active:text-red-600 focus:text-red-600">Blogs</Link>
+        <Link to="/tousBlogs" className=" text-[#F9DBBB] hover:text-gray-300 active:text-[#E53935] focus:text-[#E53935]">Blogs</Link>
         </p>
         <p className="mr-6">
-        <a href="#" className=" text-[#F9DBBB] hover:text-gray-300 active:text-red-600 focus:text-red-600" onClick={scrollToBottom}>Contactez nous</a>
+          <Link
+            to="#"
+            className=" text-[#F9DBBB] hover:text-gray-300 active:text-[#E53935] focus:text-[#E53935]"
+            onClick={scrollToBottom}
+          >
+            Contactez nous
+          </Link>
         </p>
       </div>
       <div className="flex flex-row gap-2">
@@ -124,26 +128,32 @@ const Navbarmembre = () => {
         <li className="mr-4">
             <Link to="#" onClick={()=>{const profila = document.querySelector('#profila');
       profila.classList.add('hidden');handleLogout();
-    }} className=" text-red-600 hover:text-gray-300 underline underline-offset-8 opacity-90">Déconexion</Link>
+    }} className=" text-[#E53935] hover:text-gray-300 underline underline-offset-8 opacity-90">Déconexion</Link>
         </li>
     </ul>
   </div>
       <div style={{backgroundColor: '#2E3840'}}  className="z-10 fixed left-0 right-0 float-center  mt-32 justify-center flex md:hidden hidden p-4" id="menu2">
     <p className="mr-6">
-    <Link to="/Apropos" className=" text-[#F9DBBB] hover:text-gray-300 active:text-red-600 focus:text-red-600">A propos</Link>
+    <Link to="/Apropos" className=" text-[#F9DBBB] hover:text-gray-300 active:text-[#E53935] focus:text-[#E53935]">A propos</Link>
     </p>
     <p className="mr-6">
-    <Link to="/Evenements" className=" text-[#F9DBBB] hover:text-gray-300 active:text-red-600 focus:text-red-600">Evenements</Link>
+    <Link to="/Evenements" className=" text-[#F9DBBB] hover:text-gray-300 active:text-[#E53935] focus:text-[#E53935]">Evenements</Link>
     </p>
     <p className="mr-6">
-    <Link to="/Besoins" className=" text-[#F9DBBB] hover:text-gray-300 active:text-red-600 focus:text-red-600">Nos besoins</Link>
+    <Link to="/Besoins" className=" text-[#F9DBBB] hover:text-gray-300 active:text-[#E53935] focus:text-[#E53935]">Nos besoins</Link>
     </p>
     <p className="mr-6">
-    <Link to="/Blogs" className=" text-[#F9DBBB] hover:text-gray-300 active:text-red-600 focus:text-red-600">Blogs</Link>
+    <Link to="/Blogs" className=" text-[#F9DBBB] hover:text-gray-300 active:text-[#E53935] focus:text-[#E53935]">Blogs</Link>
     </p>
     <p className="mr-6">
-    <a href="#" className=" text-[#F9DBBB] hover:text-gray-300 active:text-red-600 focus:text-red-600" onClick={scrollToBottom}>Contactez nous</a>
-    </p>
+          <Link
+            to="#"
+            className=" text-[#F9DBBB] hover:text-gray-300 active:text-[#E53935] focus:text-[#E53935]"
+            onClick={scrollToBottom}
+          >
+            Contactez nous
+          </Link>
+        </p>
   </div>
   </nav>
     );

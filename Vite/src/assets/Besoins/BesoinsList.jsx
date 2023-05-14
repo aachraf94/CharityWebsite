@@ -13,8 +13,8 @@ const BesoinsList = ({ besoins }) => {
           key={besoin.id}
         >
           {besoin.id % 2 === 1 ? (
-            <div className="evenement-preview flex flex-row p-4 mt-4 w-full justify-between">
-              <div className="flex justify-start w-[100%] rounded mb-12 px-4">
+            <div className="evenement-preview flex flex-row p-4 mt-4 w-full ">
+              <div className="flex justify-start w-[40%] rounded mb-12 px-4">
                 <img
                   src={
                     besoin.id % 3 === 1
@@ -87,7 +87,7 @@ const BesoinsList = ({ besoins }) => {
                   </button>
                 </div>
               </div>
-              <div className="flex justify-end w-[100%] rounded mb-12 px-4">
+              <div className="flex justify-end w-[40%] rounded mb-12 px-4">
                 <img
                   src={
                     besoin.id % 3 === 1

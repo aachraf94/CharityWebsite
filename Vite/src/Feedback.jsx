@@ -29,7 +29,7 @@ const Feedback = () => {
           <div className="w-[50%] bg-[#F9DBBB4C] rounded-xl m-8 border-dashed border-4 border-gray-600 justify-start">
             <h2 className="titre">feedback</h2>
             <input
-              class="border-2 border-black mb-4 mt-4 text-[#4C4C4C] p-4 placeholder-[#4C4C4C]  bg-[#F9DBBB4C]  w-[80%] ml-[10%] mr-[10%] h-12"
+              className="border-2 border-black mb-4 mt-4 text-[#4C4C4C] p-4 placeholder-[#4C4C4C]  bg-[#F9DBBB4C]  w-[80%] ml-[10%] mr-[10%] h-12"
               type="text"
               placeholder=" Nom"
               id="nom"
@@ -37,7 +37,7 @@ const Feedback = () => {
               onChange={formik.handleChange}
             />
             <input
-              class="border-2 border-black mb-4 mt-4 text-[#4C4C4C] p-4 placeholder-[#4C4C4C]  bg-[#F9DBBB4C]  w-[80%] ml-[10%] mr-[10%] h-12"
+              className="border-2 border-black mb-4 mt-4 text-[#4C4C4C] p-4 placeholder-[#4C4C4C]  bg-[#F9DBBB4C]  w-[80%] ml-[10%] mr-[10%] h-12"
               type="text"
               placeholder=" Email"
               id="email"
@@ -45,7 +45,7 @@ const Feedback = () => {
               onChange={formik.handleChange}
             />
             <input
-              class="border-2 border-black mb-8 mt-4 text-[#4C4C4C] p-4 placeholder-[#4C4C4C]  bg-[#F9DBBB4C]  w-[80%] ml-[10%] mr-[10%] h-44"
+              className="border-2 border-black mb-8 mt-4 text-[#4C4C4C] p-4 placeholder-[#4C4C4C]  bg-[#F9DBBB4C]  w-[80%] ml-[10%] mr-[10%] h-44"
               type="text"
               placeholder=" Votre message ... "
               id="message"

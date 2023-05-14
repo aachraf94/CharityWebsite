@@ -64,9 +64,9 @@ class Apropos extends Component {
 </div>
 <div className="wrapper flex flex-col justify-center ">
   <div className="fond p-4 flex text-center">
-    <h2 className="w-full">Fondation Coeur Espoir en chiffre</h2>
+    <h2 className="w-full text-[#f9dbbb]">Fondation Coeur Espoir en chiffre</h2>
   </div>
-  <div className="flex flex-row justify-center">
+  <div className="flex flex-wrap justify-center">
   <div className="container mb-2 mx-4 sm:mx-2">
     <span className="num" data-val="2050">000</span>
     <span className="text">membres</span>

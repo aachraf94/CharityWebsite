@@ -3,13 +3,13 @@ import BlogsListadmin from "./BlogsListadmin";
 import BlogsListmembre from "./BlogsListmembre";
 import BlogsList from "./BlogsList";
 import { api } from "../../utils/api";
-
 const Blogs = ({ role }) => {
+  console.log("BLOGS ROLE WEWE: ",role)
   const [blogs, setBlogs] = useState([]);
   useEffect(() => {
-    api.get("/getBlogs").then((res) => setBlogs(res.data));
+    console.log("getting blogs");
+    api.get("/getBlogs").then((res) => {console.log(res);setBlogs(res.data)});
   }, []);
-  console.log("Role blogs: ",role);
   if (role === "ADMIN") {
     return <BlogsListadmin blogs={blogs} />;
   } else if (role === "MEMBRE") {

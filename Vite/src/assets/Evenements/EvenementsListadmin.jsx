@@ -77,6 +77,7 @@ const EvenementsListadmin = ({ evenements }) => {
                     >
                       Voir Plus
                     </button>
+                    {<></>}
                     <button
                       onClick={() => setInscrire(!inscrire)}
                       style={{ backgroundColor: "#2E3840" }}

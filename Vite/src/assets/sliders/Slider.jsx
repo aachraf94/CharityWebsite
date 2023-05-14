@@ -11,6 +11,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper";
+import { Link } from 'react-router-dom';
 
 const Slider = ({ evenements }) => {
 
@@ -61,8 +62,9 @@ const Slider = ({ evenements }) => {
                   <div className="card-content">
                       <h1 className="name">Evenement</h1>
                       <p className="description">The lorem text the section that contains header with having open functionality.</p>
-
+                        <Link to="/Evenements" >
                       <button className="button  transition duration-500 ease-in-out">Voir plus</button>
+                      </Link>
                   </div>
               </div></SwiperSlide>
         <SwiperSlide><div className="card swiper-slide">
@@ -76,8 +78,9 @@ const Slider = ({ evenements }) => {
                   <div className="card-content">
                       <h1 className="name">Evenement</h1>
                       <p className="description">The lorem text the section that contains header with having open functionality.</p>
-
+                      <Link to="/Evenements" >
                       <button className="button  transition duration-500 ease-in-out">Voir plus</button>
+                      </Link>
                   </div>
               </div></SwiperSlide>
         <SwiperSlide> <div className="card swiper-slide">
@@ -91,8 +94,9 @@ const Slider = ({ evenements }) => {
                   <div className="card-content">
                       <h1 className="name">Evenement</h1>
                       <p className="description">The lorem text the section that contains header with having open functionality.</p>
-
+                      <Link to="/Evenements" >
                       <button className="button  transition duration-500 ease-in-out">Voir plus</button>
+                      </Link>
                   </div>
               </div></SwiperSlide>
         <SwiperSlide> <div className="card swiper-slide">
@@ -106,8 +110,9 @@ const Slider = ({ evenements }) => {
                   <div className="card-content">
                       <h1 className="name">Evenement</h1>
                       <p className="description">The lorem text the section that contains header with having open functionality.</p>
-
+                      <Link to="/Evenements" >
                       <button className="button  transition duration-500 ease-in-out">Voir plus</button>
+                      </Link>
                   </div>
               </div></SwiperSlide>
         <SwiperSlide> <div className="card swiper-slide">
@@ -121,14 +126,17 @@ const Slider = ({ evenements }) => {
                   <div className="card-content">
                       <h1 className="name">Evenement</h1>
                       <p className="description">The lorem text the section that contains header with having open functionality.</p>
-
+                      <Link to="/Evenements" >
                       <button className="button  transition duration-500 ease-in-out">Voir plus</button>
+                      </Link>
                   </div>
               </div></SwiperSlide>
       </Swiper>
   </div>
   </div>
+  <Link to="/Evenements" >
   <h2 className='titre2 underline underline-offset-8'>Voir plus</h2>
+  </Link>
     </div>
     </div>
     </div>
