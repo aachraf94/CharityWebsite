@@ -1,0 +1,72 @@
+input:focus + .For {
+    outline: none;
+  }
+   input:focus +  .For,
+ input:valid + .For {
+  transform: translateY(-50%);
+  font-size: 14px;
+  left: 0px;
+  bottom: 18px;
+  color: #F9DBBB;
+}
+input:focus + .For::after,
+ input:valid + .For::after {
+  transform: translateX(0%);
+}
+.For::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 2px;
+    width: 50%;
+    height: 100%;
+  
+    transform: translateX(-100%);
+    transition: all 0.5s ease;
+  }
+  input:focus-visible::before {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #000;
+    transition: width 0.3s ease-out;
+  }
+  
+  input:focus-visible::before {
+    width: 100%;
+  }
+  /* Media queries */
+@media only screen and (max-width: 640px) {
+  .box-sizing {
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .box-sizing {
+    width: 60%;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .box-sizing {
+    width: 50%;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .box-sizing {
+    width: 90%;
+  }
+  
+  .flex-col > * {
+    margin-top: 0 !important;
+  }
+  
+  button {
+    font-size: 12px;
+    padding: 6px 16px;
+  }
+}

@@ -1,0 +1,238 @@
+
+/* Google Fonts - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+
+
+.titre{
+    align-items: center;
+    text-align: center;
+    font-size: 50px;
+    font-weight: 800;
+    color: #2E3840;
+    padding: 0px;
+    margin-bottom: 50px;
+    margin-top: 18px;
+}
+.titre2{
+  align-items: center;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 800;
+  color: #2E3840;
+  padding: 0px;
+  margin-bottom: 50px;
+  margin-top: 18px;
+}
+.slide-container {
+  max-width: 1000px;
+  width: 100%;
+  padding: 50px 40px;
+  background-color: #F9DBBB5C;
+  margin-bottom: 70px;
+  margin-top: 80px;
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.5);
+}
+.slide-content{
+  margin: 10px 80px;
+  overflow: hidden;
+  border-radius: 25px;
+}
+.card{
+  border-radius: 25px;
+  background-color: #FFF;
+  margin-bottom: 40px;
+}
+.card2{
+  border-radius: 0px;
+  background-color: #FFF;
+  margin-bottom: 40px;
+}
+.image-content,
+.card-content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 10px;
+}
+.image-content{
+  position: relative;
+  row-gap: 0;
+  padding: 0 0;
+}
+
+.card-image{
+  position: relative;
+  height: 100%;
+  width: 100%;
+  border-radius: 10%;
+  background: #FFF;
+  padding: 0px;
+}
+.card-image, .card-img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10%;
+}
+.name{
+  text-align: start;
+  font-size: 25px;
+  font-weight: 700;
+  color: #2E3840;
+}
+.description{
+  font-size: 19px;
+  color: #2E3840;
+  font-weight: 400;
+  margin: 13px;
+}
+.button{
+  border: none;
+  font-size: 20px;
+  font-weight: 800;
+  color: #F9DBBB;
+  padding: 8px 16px;
+  background-color: #2E3840;
+  border-radius: 12px;
+  margin: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.button:hover{
+  background: #1d1e23;
+  transform: translateY(-4%);
+}
+
+.cart {
+  padding: 5px;
+  background-color: #F9DBBB;
+  color: #F9DBBB;
+}
+.grid {
+  display: grid;
+  width: 100%;
+  grid-gap: 6rem;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  align-items: start;
+}
+.grid-item {
+  background-color: #F9DBBB;
+  color: #F9DBBB;
+  border-radius: 0.6rem;
+  overflow: hidden;
+  box-shadow: 0.1rem 0.2rem 1.5rem rgba(89, 85, 85, 0.1);
+  cursor: pointer;
+  transition: 0.2s;
+}
+.grid-item:hover {
+  transform: translateY(-0.4%);
+  box-shadow: 0.2rem 0.5rem 2.5rem rgba(0, 0, 0, 0.5);
+}
+.cart-header {
+  font-size: 2rem;
+  font-weight: 500;
+  color: #0d0d0d;
+  margin-bottom: 4px;
+  margin-top: 7px;
+}
+.cart-text {
+  font-size: 1rem;
+  letter-spacing: 0.1rem;
+  line-height: 1.7;
+  color: #3d3d3d;
+  margin-bottom: 2.5rem;
+  padding: 13px;
+}
+.cart-btn {
+  display: block;
+  width: 33%;
+  font-size: 1.2rem;
+  text-align: center;
+  color: #F9DBBB;
+  background-color: #1a1a1b;
+  border: none;
+  border-radius: 0.4rem;
+  transition: 0.2s;
+  cursor: pointer;
+  letter-spacing: 0.1rem;
+  margin-top:0;
+  margin-left: 10px;
+  margin-bottom: 13px;
+}
+.cart-btnn {
+  display: block;
+  width: 210px;
+  font-size: 1.2rem;
+  text-align: center;
+  color: #F9DBBB;
+  background-color: #1a1a1b;
+  border: none;
+  border-radius: 0.4rem;
+  transition: 0.2s;
+  cursor: pointer;
+  letter-spacing: 0.1rem;
+  margin-top:0;
+}
+.grid-button {
+  width: 22%;
+  padding: 15px;
+  margin: 7%;
+  font-size: 1.2rem;
+  text-align: center;
+  color: #F9DBBB;
+  background-color: #1a1a1b;
+  border: none;
+  border-radius: 1.2rem;
+  transition: 0.2s;
+  cursor: pointer;
+  letter-spacing: 0.1rem;
+  margin-left: 40%;
+}
+
+
+.cart-btn:hover,
+.cart-btn:active,
+.grid-button:hover,
+.grid-button:active {
+  background-color: gray;
+  transform: translateY(-4%);
+}
+
+.cart-btn:hover span,
+.cart-btn:active span{
+  margin-left: 1.5rem;
+}
+
+@media screen and (max-width: 768px) {
+  .slide-content{
+    margin: 0 10px;
+  }
+  .swiper-navBtn{
+    display: none;
+  }
+  .grid {
+    grid-gap: 8rem;
+  }
+}
+.swiper-button-prev,
+.swiper-button-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.swiper-button-prev {
+  left: 0;
+}
+
+.swiper-button-next {
+  right: 0;
+}

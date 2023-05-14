@@ -1,0 +1,9 @@
+/*@tailwind base;
+@tailwind components;
+@tailwind utilities;
+input:focus + span,
+input:not(:placeholder-shown) + span {
+  opacity: 0;
+  
+}
+*/
