@@ -7,8 +7,11 @@ import { MdAttachMoney } from "react-icons/md";
 import { useFormik } from "formik";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
-function Besoin() {
+function Besoin({role}) {
+ 
+
   const formik = useFormik({
     initialValues: {
       nom: "",
@@ -37,6 +40,13 @@ function Besoin() {
     },
   });
 
+  const [aff,setAff]=useState()
+useEffect(()=>{
+ 
+  role=="ADMIN" || role=="MEMBER" ?setAff(false): setAff(true);
+},[])
+
+
   return (
     <>
       <Link
@@ -45,18 +55,22 @@ function Besoin() {
       >
         <img src={log} alt="" className="h-8 sm:h-12 md:h-12 lg:h-12 xl:h-12" />
       </Link>
-      <div className="relative"></div>
-      <span className="text-white font-normal font-poppins text-base w-240 h-24 absolute top-8 right-44 flex-none order-0 flex-grow-0 ml-7">
-        N'est pas encore un membre
-      </span>
-      <div className="fixed top-2 right-0 m-4">
-        <Link
-          to="/rejoignez"
-          className="bg-transparent rounded-xl border border-solid border-white-300 whitespace-no-wrap text-yellow-300 font-medium px-4 py-2"
-        >
-          Rejoignez Nous
-        </Link>
-      </div>
+      {aff && (
+  <div className="relative">
+    <span className="text-white font-normal font-poppins text-base w-240 h-24 absolute top-8 right-44 flex-none order-0 flex-grow-0 ml-7">
+      N'est pas encore un membre
+    </span>
+    <div className="fixed top-2 right-0 m-4">
+      <Link
+        to="/rejoignez"
+        className="bg-transparent rounded-xl border border-solid border-white-300 whitespace-no-wrap text-yellow-300 font-medium px-4 py-2"
+      >
+        Rejoignez Nous
+      </Link>
+    </div>
+  </div>
+)}
+
       <form onSubmit={formik.handleSubmit}>
         <div className="bg-blue-400 h-screen flex justify-center items-center">
           <img src={img} alt="" className="h-screen w-full object-cover" />

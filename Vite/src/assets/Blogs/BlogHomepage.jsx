@@ -1,7 +1,4 @@
 import { useEffect, useState } from 'react';
-import image1 from '../FrontAssets/images1/Chamel.png';
-import image2 from '../FrontAssets/images1/hands.png';
-import image3 from '../FrontAssets/images1/photo17.png';
 import { Link } from 'react-router-dom';
 
 
@@ -68,7 +65,6 @@ const BlogHomepage = ({ blogs }) => {
   
     // Only display the first three blogs
     const firstThreeBlogs = blogswithphoto.slice(0, 3);
-    console.log(firstThreeBlogs)
   
     return (
       <div className='flex flex-col '>
@@ -93,8 +89,8 @@ const BlogHomepage = ({ blogs }) => {
                     className="py-1  rounded-full"
                   />
                 </div>
-                <p className="font-semibold py-4 px-4 flex">{blog.authorMail}</p>
-                <p className="font-bold py-4 px-4 flex">{blog.timestamp.split(" ")[0]}</p>
+                <p  style={{ color : "#2E3840"} } className="font-semibold py-4 px-4 flex">{blog.authorMail}</p>
+                <p style={{ color : "#2E3840"} } className="font-bold py-4 px-4 flex">{blog.timestamp.split(" ")[0]}</p>
               </div>
               <div className="px-2 py-2 w-120">
                 <h2

@@ -70,13 +70,12 @@ function ModifierCompte() {
   const handleShowPassword2 = () => {
     setShowPassword2(!showPassword2);
   };
-  const navigate = useNavigate("/");
 
   return (
     <>
       <Link
-        href="/"
-        class="absolute top-0 left-0 mt-2 sm:mt-4 md:mt-4 lg:mt-4 xl:mt-4 ml-2 sm:ml-4 md:ml-4 lg:ml-4 xl:ml-10"
+        to="/"
+        className="absolute z-10 top-0 left-0 mt-2 sm:mt-4 md:mt-4 lg:mt-4 xl:mt-4 ml-2 sm:ml-4 md:ml-4 lg:ml-4 xl:ml-10"
       >
         <img src={log} alt="" className="h-8 sm:h-12 md:h-12 lg:h-12 xl:h-12" />
       </Link>

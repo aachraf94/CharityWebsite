@@ -127,14 +127,14 @@ const BlogsListadmin = ({ blogs }) => {
                   <div className="flex justify-center mt-6">
                     <button
                       style={{ backgroundColor: "#2E3840" }}
-                      className="font-extrabold  cart-btn flex  transition duration-500 ease-in-out px-1 py-2 w-36 self-center ml-[30%]"
+                      className="font-extrabold  cart-btnn flex  transition duration-500 ease-in-out px-1 py-2 w-36 self-center ml-[30%]"
                       onClick={() => handleBlogExpand(blog.id)}
                     >
                       Voir Plus
                     </button>
                     <button
                       style={{ backgroundColor: "#2E3840" }}
-                      className="font-extrabold  cart-btn flex transition duration-500 ease-in-out px-1 py-2 w-24 self-center ml-[30%]"
+                      className="font-extrabold  cart-btnn flex transition duration-500 ease-in-out px-1 py-2 w-24 self-center ml-[30%]"
                     >
                       Archiver
                     </button>

@@ -32,8 +32,8 @@ const BesoinsListmembre = ({ besoins }) => {
               {besoin.title}
             </h2>
             
-            <p className="font-bold py-2 flex"><img src={quantité} alt="" className='px-3'  />quantité : {besoin.quantité}</p>
-            <p className="font-black mb-4">{besoin.body}</p>
+            <p className="font-bold py-2 flex"><img src={quantité} alt="" className='px-3'  />quantité : {besoin.quantite}</p>
+            <p className="font-black mb-4">{besoin.content}</p>
             <div className='flex justify-center mt-6'>
             <Link to="/Besoin"><button style={{ backgroundColor: '#2E3840' }} className='cart-btn  font-extrabold transition duration-500 ease-in-out px-2 py-2  ml-4'>Faites Une Donation</button></Link>
             <button  style={{ backgroundColor: '#2E3840' }}
@@ -48,8 +48,8 @@ const BesoinsListmembre = ({ besoins }) => {
             <h2 style={{ color: "#2E3840" }} className="text-5xl font-bold py-4">
               {besoin.title}
             </h2>
-            <p className="font-bold py-2 flex"><img src={quantité} alt="" className='px-3'  />quantité : {besoin.quantité}</p>
-            <p className="font-black mb-4">{besoin.body}</p>
+            <p className="font-bold py-2 flex"><img src={quantité} alt="" className='px-3'  />quantité : {besoin.quantite}</p>
+            <p className="font-black mb-4">{besoin.content}</p>
             <div className='flex justify-center mt-6'>
             <Link to="/Besoin"><button style={{ backgroundColor: '#2E3840' }} className='cart-btn  font-extrabold transition duration-500 ease-in-out px-2 py-2  ml-4'>Faites Une Donation</button></Link>
             <button  style={{ backgroundColor: '#2E3840' }}

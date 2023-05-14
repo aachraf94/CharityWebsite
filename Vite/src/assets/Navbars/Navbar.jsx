@@ -2,6 +2,7 @@ import Logo from "../FrontAssets/images1/LOGO.png";
 import { Link } from "react-router-dom";
 const Navbar = () => {
   const scrollToBottom = () => {
+    console.log('trrtrt');
     window.scrollTo({
       top: 99999,
       left: 99999,
@@ -31,7 +32,7 @@ const Navbar = () => {
         <p className="mr-6">
           <Link
             to="/Apropos"
-            className=" text-[#F9DBBB] hover:text-gray-300 active:text-red-600 focus:text-red-600"
+            className=" text-[#F9DBBB] hover:text-gray-300 active:text-[#E53935] focus:text-[#E53935]"
           >
             A propos
           </Link>
@@ -39,7 +40,7 @@ const Navbar = () => {
         <p className="mr-6">
           <Link
             to="/Evenements"
-            className="text-[#F9DBBB] hover:text-gray-300 active:text-red-600 focus:text-red-600"
+            className="text-[#F9DBBB] hover:text-gray-300 active:text-[#E53935] focus:text-[#E53935]"
           >
             Evenements
           </Link>
@@ -47,27 +48,27 @@ const Navbar = () => {
         <p className="mr-6">
           <Link
             to="/NosBesoins"
-            className=" text-[#F9DBBB] hover:text-gray-300 active:text-red-600 focus:text-red-600"
+            className=" text-[#F9DBBB] hover:text-gray-300 active:text-[#E53935] focus:text-[#E53935]"
           >
             Nos besoins
           </Link>
         </p>
         <p className="mr-6">
           <Link
-            to="/Blogs"
-            className=" text-[#F9DBBB] hover:text-gray-300 active:text-red-600 focus:text-red-600"
+            to="/tousBlogs"
+            className=" text-[#F9DBBB] hover:text-gray-300 active:text-[#E53935] focus:text-[#E53935]"
           >
             Blogs
           </Link>
         </p>
         <p className="mr-6">
-          <a
-            href="#"
-            className=" text-[#F9DBBB] hover:text-gray-300 active:text-red-600 focus:text-red-600"
+          <Link
+            to="#"
+            className=" text-[#F9DBBB] hover:text-gray-300 active:text-[#E53935] focus:text-[#E53935]"
             onClick={scrollToBottom}
           >
             Contactez nous
-          </a>
+          </Link>
         </p>
       </div>
       <div className="flex flex-row gap-2">
@@ -117,7 +118,7 @@ const Navbar = () => {
         <p className="mr-6">
           <Link
             to="/Apropos"
-            className=" text-[#F9DBBB] hover:text-gray-300 active:text-red-600 focus:text-red-600"
+            className=" text-[#F9DBBB] hover:text-gray-300 active:text-[#E53935] focus:text-[#E53935]"
           >
             A propos
           </Link>
@@ -125,7 +126,7 @@ const Navbar = () => {
         <p className="mr-6">
           <Link
             to="/Evenements"
-            className=" text-[#F9DBBB] hover:text-gray-300 active:text-red-600 focus:text-red-600"
+            className=" text-[#F9DBBB] hover:text-gray-300 active:text-[#E53935] focus:text-[#E53935]"
           >
             Evenements
           </Link>
@@ -133,7 +134,7 @@ const Navbar = () => {
         <p className="mr-6">
           <Link
             to="/Besoins"
-            className=" text-[#F9DBBB] hover:text-gray-300 active:text-red-600 focus:text-red-600"
+            className=" text-[#F9DBBB] hover:text-gray-300 active:text-[#E53935] focus:text-[#E53935]"
           >
             Nos besoins
           </Link>
@@ -141,19 +142,19 @@ const Navbar = () => {
         <p className="mr-6">
           <Link
             to="/Blogs"
-            className=" text-[#F9DBBB] hover:text-gray-300 active:text-red-600 focus:text-red-600"
+            className=" text-[#F9DBBB] hover:text-gray-300 active:text-[#E53935] focus:text-[#E53935]"
           >
             Blogs
           </Link>
         </p>
         <p className="mr-6">
-          <a
-            href="#"
-            className=" text-[#F9DBBB] hover:text-gray-300 active:text-red-600 focus:text-red-600"
+          <Link
+            to="#"
+            className=" text-[#F9DBBB] hover:text-gray-300 active:text-[#E53935] focus:text-[#E53935]"
             onClick={scrollToBottom}
           >
             Contactez nous
-          </a>
+          </Link>
         </p>
       </div>
     </nav>

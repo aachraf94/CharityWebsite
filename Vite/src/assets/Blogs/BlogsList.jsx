@@ -85,7 +85,7 @@ const BlogsList = ({ blogs }) => {
               </h2>
               <button
                 style={{ backgroundColor: '#2E3840' }}
-                className="font-extrabold mt-4 cart-btn flex justify-center transition duration-500 ease-in-out px-2 py-2 w-32"
+                className="font-extrabold mt-4 cart-btnn flex justify-center transition duration-500 ease-in-out px-2 py-2 w-32"
                 onClick={() => handleBlogExpand(blog.id)}
               >
                 Voir Plus

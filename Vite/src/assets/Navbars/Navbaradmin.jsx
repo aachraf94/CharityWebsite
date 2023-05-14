@@ -2,7 +2,6 @@ import Logo from "../FrontAssets/images1/LOGO.png";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
-import photo from "../FrontAssets/Sans titre.jpeg"
 import jwt_decode from "jwt-decode";
 import dash from "../images1/dash.svg";
 
@@ -11,7 +10,7 @@ const Navbaradmin = () => {
   const [url, setUrl] = useState("");
  
   useEffect(() => {
-    const data={
+    const data ={
       email:jwt_decode(localStorage.getItem("token"))
     }
    
@@ -26,7 +25,7 @@ const Navbaradmin = () => {
   .then((response) => response.json())
   .then((response) => {
     setUrl(response.url);
-     setImageUrl(useState(response.url));
+     setUrl(response.url);
 
   })
   .catch((error) => {
@@ -71,7 +70,7 @@ const Navbaradmin = () => {
         <p className="mr-6">
           <Link
             to="/Apropos"
-            className=" text-[#F9DBBB] hover:text-gray-300 active:text-red-600 focus:text-red-600"
+            className=" text-[#F9DBBB] hover:text-gray-300 active:text-[#E53935] focus:text-[#E53935]"
           >
             A propos
           </Link>
@@ -79,7 +78,7 @@ const Navbaradmin = () => {
         <p className="mr-6">
           <Link
             to="/Evenements"
-            className="text-[#F9DBBB] hover:text-gray-300 active:text-red-600 focus:text-red-600"
+            className="text-[#F9DBBB] hover:text-gray-300 active:text-[#E53935] focus:text-[#E53935]"
           >
             Evenements
           </Link>
@@ -87,15 +86,15 @@ const Navbaradmin = () => {
         <p className="mr-6">
           <Link
             to="/NosBesoins"
-            className=" text-[#F9DBBB] hover:text-gray-300 active:text-red-600 focus:text-red-600"
+            className=" text-[#F9DBBB] hover:text-gray-300 active:text-[#E53935] focus:text-[#E53935]"
           >
             Nos besoins
           </Link>
         </p>
         <p className="mr-6">
           <Link
-            to="/BlogsTous"
-            className=" text-[#F9DBBB] hover:text-gray-300 active:text-red-600 focus:text-red-600"
+            to="/tousBlogs"
+            className=" text-[#F9DBBB] hover:text-gray-300 active:text-[#E53935] focus:text-[#E53935]"
           >
             Blogs
           </Link>
@@ -103,7 +102,7 @@ const Navbaradmin = () => {
         <p className="mr-6">
           <Link
             to="#"
-            className=" text-[#F9DBBB] hover:text-gray-300 active:text-red-600 focus:text-red-600"
+            className=" text-[#F9DBBB] hover:text-gray-300 active:text-[#E53935] focus:text-[#E53935]"
             onClick={scrollToBottom}
           >
             Contactez nous
@@ -253,7 +252,7 @@ const Navbaradmin = () => {
                 const profila = document.querySelector("#profila");
                 profila.classList.add("hidden");handleLogout()
               }}
-              className=" text-red-600 hover:text-gray-300 underline underline-offset-8 opacity-90"
+              className=" text-[#E53935] hover:text-gray-300 underline underline-offset-8 opacity-90"
             >
               Déconexion
             </Link>
@@ -268,7 +267,7 @@ const Navbaradmin = () => {
         <p className="mr-6">
           <Link
             to="/Apropos"
-            className=" text-[#F9DBBB] text-center hover:text-gray-300 active:text-red-600 focus:text-red-600"
+            className=" text-[#F9DBBB] text-center hover:text-gray-300 active:text-[#E53935] focus:text-[#E53935]"
           >
             A propos
           </Link>
@@ -276,7 +275,7 @@ const Navbaradmin = () => {
         <p className="mr-6">
           <Link
             to="/Evenements"
-            className=" text-[#F9DBBB] hover:text-gray-300 active:text-red-600 focus:text-red-600"
+            className=" text-[#F9DBBB] hover:text-gray-300 active:text-[#E53935] focus:text-[#E53935]"
           >
             Evenements
           </Link>
@@ -284,7 +283,7 @@ const Navbaradmin = () => {
         <p className="mr-6">
           <Link
             to="/Besoins"
-            className=" text-[#F9DBBB] hover:text-gray-300 active:text-red-600 focus:text-red-600"
+            className=" text-[#F9DBBB] hover:text-gray-300 active:text-[#E53935] focus:text-[#E53935]"
           >
             Nos besoins
           </Link>
@@ -292,7 +291,7 @@ const Navbaradmin = () => {
         <p className="mr-6">
           <Link
             to="/BlogsTous"
-            className=" text-[#F9DBBB] hover:text-gray-300 active:text-red-600 focus:text-red-600"
+            className=" text-[#F9DBBB] hover:text-gray-300 active:text-[#E53935] focus:text-[#E53935]"
           >
             Blogs
           </Link>
@@ -300,7 +299,7 @@ const Navbaradmin = () => {
         <p className="mr-6">
           <Link
             to="#"
-            className=" text-[#F9DBBB] hover:text-gray-300 active:text-red-600 focus:text-red-600"
+            className=" text-[#F9DBBB] hover:text-gray-300 active:text-[#E53935] focus:text-[#E53935]"
             onClick={scrollToBottom}
           >
             Contactez nous

@@ -7,14 +7,12 @@ import { AiOutlineMail } from "react-icons/ai";
 import { MdAttachMoney } from "react-icons/md";
 import { FaRegCreditCard } from "react-icons/fa";
 import { useFormik } from "formik";
-import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { api } from "../utils/api";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-function Don() {
+function Don({role}) {
   const navigate = useNavigate();
-  const[error,setError]=useState(false);
   const formik = useFormik({
     initialValues: {
       nom: "",
@@ -35,6 +33,12 @@ function Don() {
     },
   });
 
+  const [aff,setAff] = useState();
+  useEffect(()=>{
+    role=="ADMIN" || role=="MEMBER" ?setAff(false): setAff(true);
+  },[])
+
+  console.log(role)
   return (
     <>
       <Link
@@ -43,7 +47,9 @@ function Don() {
       >
         <img src={log} alt="" className="h-8 sm:h-12 md:h-12 lg:h-12 xl:h-12" />
       </Link>
-      <div className="relative"></div>
+      { aff && (
+      <div className="relative">
+      
       <span className="text-white font-normal font-poppins text-base w-240 h-24 absolute top-8 right-44 flex-none order-0 flex-grow-0 ml-7">
         N'est pas encore un membre
       </span>
@@ -54,6 +60,7 @@ function Don() {
           </button>
         </Link>
       </div>
+      </div> )}
       <form onSubmit={formik.handleSubmit}>
         <div className="bg-blue-400 h-screen flex justify-center items-center">
           <img src={img} alt="" className="h-screen w-full object-cover" />

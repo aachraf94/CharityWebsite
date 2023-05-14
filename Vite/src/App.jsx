@@ -32,6 +32,7 @@ import NosBesoins from "./assets/NosBesoins";
 import Blogs from "./assets/Blogs/Blogs";
 import Feedback from "./Feedback";
 import ModifierParticipant from "./assets/ModifierParticipant";
+import BlogsTous from "./assets/Blogs/BlogTous";
 
 
 
@@ -44,12 +45,10 @@ function App() {
         email: jwt_decode(localStorage.getItem("token")).user,
       };
       api.post("/getrole", data).then((res) => setRole(res.data.role));
-    } catch (err) {
+      } catch (err) {
       setRole("visitor");
     }
   }, []);
-  console.log(role)
-
   return (
     <>
       <Router>
@@ -65,17 +64,19 @@ function App() {
               </>
             }
           />
-          <Route path="/login" element={<Login role={role} />} />
+          <Route path="/tousBlogs" element={<><NavbarMenu role={role} /><BlogsTous/><Footer /></>}/>
+          <Route path="/Blogs" element={<><NavbarMenu role={role} /><Blogs role={role}/></>}/>
+         <Route path="/login" element={<Login role={role} />} />
           <Route path="/Rejoignez" element={<Register role={role} />} />
           <Route path="/choice" element={<Choice />} />
-          <Route path="/don" element={<Don />} />
+          <Route path="/don" element={<Don role={role}/>} />
           <Route path="/deconnexion" element={<Deconnexion />} />
           <Route path="/utilisateurs" element={<Utilisateurs />} />
           <Route path="/stock" element={<Stock />} />
           <Route path="/participants" element={<Participants />} />
           <Route path="/demandes" element={<><DemandesList  /><NavbarMenu role={role} /><Footer /></>} />
-          <Route path="/modifiercompte2" element={<><ModifierCompte2  /><Footer /></>} />
-          <Route path="/besoin" element={<><Besoin  /><Footer /></>} />
+          <Route path="/modifiercompte2" element={<><ModifierCompte2  /></>} />
+          <Route path="/besoin" element={<><Besoin role={role}  /></>} />
           <Route path="/participant" element={<ModifierParticipant/>} />
 
           <Route
@@ -129,6 +130,7 @@ function App() {
               <>
                 <NavbarMenu role={role} />
                 <NosBesoins role={role} />
+                <Footer />
               </>
             }
           />
