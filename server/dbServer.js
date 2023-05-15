@@ -68,7 +68,6 @@ app.get("/getBlogs", async (req, res) => {
     return res.send({ role: "visitor" });
   }
   const email = req.body.email;
-  console.log("sewy : ",email)
   const [rows, fields] = await db
     .promise()
     .execute("select * from users where email = ?", [email]);
@@ -81,7 +80,7 @@ app.post("/login", async (req, res) => {
   //getting info from the body
   const user = req.body.email;
   const password = req.body.password;
-  console.log(`user:${user} password:${password}`);
+
   const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
   //TODO:CHECK IF THE REFRESH TOKEN ALREADY EXISTS IN THE DB , AND IF SO THEN DON'T LOGIN ONCE AGAIN
   db.getConnection(async (err, connection) => {
@@ -119,15 +118,6 @@ app.post("/login", async (req, res) => {
       );
     }
   });
-});
-
-app.delete("/logout", async (req, res) => {
-  await db
-    .promise()
-    .execute("delete from refresh_token where token = ?", [
-      req.body.refreshToken,
-    ]);
-  res.sendStatus(200);
 });
 
 //CREATE NEW ACCESS TOKEN FROM REFRESH TOKEN
@@ -172,7 +162,6 @@ app.post("/getrole", async (req, res) => {
     return res.json({ role: "visitor" });
   }
   const email = req.body.email;
-  console.log("sewy : ", email);
   const [rows, fields] = await db
     .promise()
     .execute("select * from users where email = ?", [email]);
@@ -182,45 +171,7 @@ app.post("/getrole", async (req, res) => {
   res.json({ role: rows[0].role }); // send the userrole variable as a JSON object
 });
 
-/*
-app.post("/login", (req, res) => {
-  //getting info from the body
-  const user = req.body.email;
-  const password = req.body.password;
-  console.log(`user:${user},password:${password}`);
-  db.getConnection(async (err, connection) => {
-    if (err) throw err;
 
-    //checking whether email exists in the db
-    const [rows, fields] = await db
-      .promise()
-      .execute("Select * from users where email = ?", [user]);
-    if (rows.length == 0) {
-      res.sendStatus(404, "User does not exist");
-    } else {
-      //comparing the passwords using bcrypt.compare()
-      const hashedPassword = rows[0].password;
-      await bcrypt.compare(password, hashedPassword, function (err, res2) {
-        if (err) throw err;
-        if (res2) {
-          const accesstoken = generateAccessToken({
-            user: user,
-            role: rows[0].role,
-          });
-
-          res.json({ accessToken: accesstoken });
-          //TODO: READ MORE ABOUT ACCESS TOKENS
-
-          userrole = rows[0].role;
-          localStorage.setItem("accesstoken", accesstoken);
-        } else {
-          res.sendStatus(401, "Password incorrect");
-        }
-      });
-    }
-  });
-});
-*/
 app.get("/getphoto", async (req, res) => {
   try {
     const authHeader = req.headers.authorization;
@@ -241,6 +192,40 @@ app.get("/getphoto", async (req, res) => {
     console.error(error);
   }
 });
+
+app.get("/listedons", async(req,res) => {
+  const token = req.headers["authorization"].split(" ")[1];
+  if (token == null) return res.sendStatus(401);
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+    if (err) return res.sendStatus(403);
+    if (user == null) {
+      return res.sendStatus(403);
+    }
+    req.user = user;
+  });
+  if (req.user == null) return res.sendStatus(404);
+  const [rows, fields] = await db
+    .promise()
+    .execute("select * from users where email =?", [req.user.user]);
+  if (rows.length == 0) {
+    return res.sendStatus(403);
+  } else {
+    if (rows[0].role === "ADMIN") {
+      // check if the request sender is ADMIN (only ADMIN can view users_dashboard)
+      db.query("Select * from don", (err, results, fields) => {
+        if (err) throw err;
+        if (results.length === 0) res.json();
+        else res.json(results);
+      
+      });
+    } else {
+      return res.sendStatus(403);
+    }
+  }
+
+
+
+})
 
 app.get("/getphotobyemail", async (req, res) => {
   try {
@@ -263,6 +248,28 @@ app.get("/getphotobyemail", async (req, res) => {
 });
 
 
+app.get("/getphotobytitle", async (req, res) => {
+  try {
+
+    const title = req.headers.title;
+
+    const [rows1, fields1] = await db
+      .promise()
+      .execute("SELECT * from events  WHERE title=?", [title]);
+
+    const [rows2, fields2] = await db
+      .promise()
+      .execute("SELECT data from photos  WHERE id=?", [rows1[0].photo]);
+    const url = `https://res.cloudinary.com/dsi1up4rk/image/upload/v1684161985/Photos_evenements/${rows2[0].data}.jpg`;
+    // send response
+    res.json({ url: url });
+
+  } 
+  catch (error) {
+    console.error(error);
+  }
+});
+
 app.get("/getuser", async (req, res) => {
   // Decode the JWT token
   const authHeader = req.headers.authorization;
@@ -280,6 +287,28 @@ app.get("/getuser", async (req, res) => {
    catch {}
 });
 //MODIFY PASSWORD
+
+app.get("/getparticipant", async (req, res) => {
+  // Decode the JWT token
+  try {
+    const token = req.headers["authorization"].split(" ")[1];
+    if (token == null) return res.sendStatus(401);
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, async (err, user) => {
+      if (err) return res.sendStatus(403);
+      req.user = user;
+    });
+    const id = req.headers["id"]; // blog id to delete
+    console.log(id)
+    const [rows,fields] = await db
+    .promise()
+    .execute("select *  from participant where id = ?", [id]);
+    console.log(rows[0])
+    res.json(rows[0])
+    
+  } catch (err) {
+    res.sendStatus(403);
+  }
+});
 app.post("/modifyPassword", async (req, res) => {
   const newpassword = req.body.password;
   const email = req.body.email;
@@ -529,9 +558,12 @@ app.get("/listenecessiteux", async(req,res) => {
     }
   }
 
+  
 
 
 })
+
+
 
 
 app.get("/listeparticipants", async(req,res) => {
@@ -554,6 +586,40 @@ app.get("/listeparticipants", async(req,res) => {
     if (rows[0].role === "ADMIN") {
       // check if the request sender is ADMIN (only ADMIN can view users_dashboard)
       db.query("Select * from participant", (err, results, fields) => {
+        if (err) throw err;
+        if (results.length === 0) res.json();
+        else res.json(results);
+      
+      });
+    } else {
+      return res.sendStatus(403);
+    }
+  }
+
+
+
+})
+
+app.get("/listebesoins", async(req,res) => {
+  const token = req.headers["authorization"].split(" ")[1];
+  if (token == null) return res.sendStatus(401);
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+    if (err) return res.sendStatus(403);
+    if (user == null) {
+      return res.sendStatus(403);
+    }
+    req.user = user;
+  });
+  if (req.user == null) return res.sendStatus(404);
+  const [rows, fields] = await db
+    .promise()
+    .execute("select * from users where email =?", [req.user.user]);
+  if (rows.length === 0) {
+    return res.sendStatus(403);
+  } else {
+    if (rows[0].role === "ADMIN") {
+      // check if the request sender is ADMIN (only ADMIN can view users_dashboard)
+      db.query("Select * from besoins", (err, results, fields) => {
         if (err) throw err;
         if (results.length === 0) res.json();
         else res.json(results);
@@ -598,6 +664,81 @@ app.get("/listestock", async(req,res) => {
         if (err) throw err;
         if (results.length === 0) res.json();
         else res.json(results);
+        
+        
+      
+      });
+    } else {
+      return res.sendStatus(403);
+    }
+  }
+
+
+
+})
+
+
+app.get("/listebesoins", async(req,res) => {
+  const token = req.headers["authorization"].split(" ")[1];
+  if (token == null) return res.sendStatus(401);
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+    if (err) return res.sendStatus(403);
+    if (user == null) {
+      return res.sendStatus(403);
+    }
+    req.user = user;
+  });
+  if (req.user == null) return res.sendStatus(404);
+  const [rows, fields] = await db
+    .promise()
+    .execute("select * from users where email =?", [req.user.user]);
+  if (rows.length === 0) {
+    return res.sendStatus(403);
+  } else {
+    if (rows[0].role === "ADMIN") {
+      // check if the request sender is ADMIN (only ADMIN can view users_dashboard)
+      db.query("Select * from besoins", (err, results, fields) => {
+        if (err) throw err;
+        if (results.length === 0) res.json();
+        else res.json(results);
+        
+        
+      
+      });
+    } else {
+      return res.sendStatus(403);
+    }
+  }
+
+
+
+})
+
+app.get("/listeevenements", async(req,res) => {
+  const token = req.headers["authorization"].split(" ")[1];
+  if (token == null) return res.sendStatus(401);
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+    if (err) return res.sendStatus(403);
+    if (user == null) {
+      return res.sendStatus(403);
+    }
+    req.user = user;
+  });
+  if (req.user == null) return res.sendStatus(404);
+  const [rows, fields] = await db
+    .promise()
+    .execute("select * from users where email =?", [req.user.user]);
+  if (rows.length === 0) {
+    return res.sendStatus(403);
+  } else {
+    if (rows[0].role === "ADMIN") {
+      // check if the request sender is ADMIN (only ADMIN can view users_dashboard)
+      db.query("Select * from events", (err, results, fields) => {
+        if (err) throw err;
+        if (results.length === 0) res.json();
+        else res.json(results);
+        
+        
       
       });
     } else {
@@ -824,6 +965,7 @@ app.get("/getEvents", async (req, res) => {
     .promise()
     .execute("select * from events where archive = 0");
   return res.send(rows);
+
 });
 //DELETE EVENT
 app.post("/archiveEvent", async (req, res) => {
@@ -888,6 +1030,27 @@ app.get("/trinomuti" ,async(req,res)=> {
   res.json(rows)
 
 })
+
+app.get("/trimaterielstock" ,async(req,res)=> {
+ 
+  const [rows, fields] = await db 
+  .promise()
+  .execute("Select * from stock order by materiel asc")
+
+  res.json(rows)
+
+})
+
+app.get("/triquantitestock" ,async(req,res)=> {
+ 
+  const [rows, fields] = await db 
+  .promise()
+  .execute("Select * from stock order by quantite asc")
+
+  res.json(rows)
+
+})
+
 
 app.get("/triprenomuti" ,async(req,res)=> {
 
@@ -1151,6 +1314,39 @@ app.post("/updateuser", async (req, res) => {
 
 });
 
+app.post("/updateparticipant", async (req, res) => {
+  const token = req.headers["authorization"].split(" ")[1];
+  if (token == null) return res.sendStatus(401);
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+    if (err) return res.sendStatus(403);
+    if (user == null) {
+      return res.sendStatus(403);
+    }
+
+  });
+ const [rows, fields] = await db
+    .promise()
+    .execute("select * from users where email =?", [jwtDecode(token).user]);
+  if (rows.length === 0) {
+    return res.sendStatus(403);
+}
+
+console.log(req.body)
+  const id = req.body.id ;
+  const nom = req.body.nom ;
+  const email = req.body.email ;
+  const phone=req.body.phone;
+  const prenom="Amine"
+
+
+ await db 
+  .promise()
+  .execute("UPDATE  participant  SET firstname=? , lastname=?  , email = ? , phone=?  where id = ?",[prenom,nom,email,phone,id]);
+  res.send(200); 
+
+
+});
+
 // UPDATE PASSWORD
 app.post("/reset_password", async (req, res) => {
   const id = req.body.id;
@@ -1193,8 +1389,9 @@ app.post("/ajouterdon", async (req, res) => {
         montant,
         adresse,
         numero,
-        code,
         datetime.replaceAll("/", "-"),
+        code,
+        
       ]);
     return res.sendStatus(200);
   } catch (err) {

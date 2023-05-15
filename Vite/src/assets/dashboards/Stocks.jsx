@@ -10,11 +10,41 @@ const Stocks = () => {
 
   const [stock, setStock] = useState([]);
 
+  const handleMateriel = async () => {
+    fetch("http://localhost:3030/trimaterielstock", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+      .then(response => response.json())
+      .then(data => {
+         setStock(data)
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+
+  const handleQuantite = async () => {
+    fetch("http://localhost:3030/triquantitestock", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+      .then(response => response.json())
+      .then(data => {
+         setStock(data)
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+
   useEffect(() => {
-    const data = {
-      email: jwt_decode(localStorage.getItem("token"))
-    };
-  
     fetch("http://localhost:3030/listestock", {
       method: "GET",
       headers: {
@@ -92,11 +122,11 @@ const Stocks = () => {
                     </div>
                     <div className="flex flex-row justify-start items-center mb-2 w-[30%]">
                     <h2 className="text-white font-semibold text-md ">Materiel  </h2>
-                    <img src={triangle}></img>
+                   <button onClick={handleMateriel} > <img src={triangle}></img></button>
                     </div>
                     <div className="flex flex-row justify-start items-center mb-2 w-[30%] ">
                     <h2 className="text-white font-semibold text-md ">Quantité</h2>
-                    <img src={triangle}></img>
+                    <button onClick={handleQuantite}> <img src={triangle}></img></button>
                     </div>
                     <div className="flex flex-row justify-start items-center mb-2 w-[30%] ">
                     <h2 className="text-white font-semibold text-md ">Description</h2>

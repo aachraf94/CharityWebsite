@@ -5,7 +5,6 @@ import Slider from "../sliders/Slider";
 import Slider2 from "../sliders/Slider2";
 import BlogHomepage from "../Blogs/BlogHomepage";
 // import BlogHomepage from "../Blogs/BlogHomepage";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { api } from "../../utils/api";
 const HP1user = () => {
@@ -28,7 +27,7 @@ const HP1user = () => {
         </h2>
         <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-[#333333]  justify-between h-16 px-8 md:px-12 lg:px-16 mb-40">
           {" "}
-          l'éspoir .{" "}
+          l'espoir .{" "}
         </h2>
         <Link
           to="/choice"

@@ -50,7 +50,7 @@ useEffect(()=>{
   return (
     <>
       <Link
-        href="/"
+        to="/"
         class="absolute top-0 left-0 mt-2 sm:mt-4 md:mt-4 lg:mt-4 xl:mt-4 ml-2 sm:ml-4 md:ml-4 lg:ml-4 xl:ml-4"
       >
         <img src={log} alt="" className="h-8 sm:h-12 md:h-12 lg:h-12 xl:h-12" />

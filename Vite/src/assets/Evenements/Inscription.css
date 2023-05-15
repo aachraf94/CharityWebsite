@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+input:focus + span,
+input:not(:placeholder-shown) + span {
+  opacity: 0;
+
+}
+
+input:focus + span{
+    opacity: 0;
+}
+input[type=number] {
+    -moz-appearance: textfield;
+  }
+  input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

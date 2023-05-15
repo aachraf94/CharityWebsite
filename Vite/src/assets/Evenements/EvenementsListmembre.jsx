@@ -31,11 +31,8 @@ const EvenementsListmembre = ({ evenements }) => {
                 <div className="flex justify-start w-[100%] rounded mb-12 px-4">
                   <img
                     src={
-                      evenement.id % 3 === 1
-                        ? image1
-                        : evenement.id % 3 === 2
-                        ? image2
-                        : image3
+                      evenement.photoUrl
+
                     }
                     alt=""
                   />
@@ -102,11 +99,8 @@ const EvenementsListmembre = ({ evenements }) => {
                 <div className="flex justify-end w-[100%] rounded mb-12 px-4">
                   <img
                     src={
-                      evenement.id % 3 === 1
-                        ? image1
-                        : evenement.id % 3 === 2
-                        ? image2
-                        : image3
+                      evenement.photoUrl
+
                     }
                     alt=""
                   />
