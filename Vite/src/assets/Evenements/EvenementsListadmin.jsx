@@ -39,7 +39,7 @@ const EvenementsListadmin = ({ evenements }) => {
 
   const handleInscrire = () => {setInscrire(true);}
   return (
-    <div className={`popup ${blurMainPage ? 'blur' : ''}`}>
+    <div className="" id="blurg">
     <div>
       <div className="bg-[#F9DBBB4C] backdrop-blur-sm Navbar z-1 fixed top-4 left-0 right-0 mt-16 flex flex-row justify-between h-16">
         <h1 className="text-[50px] font-black color-[#2E3840] ml-16 mb-4 -mt-2 ">
@@ -93,7 +93,20 @@ const EvenementsListadmin = ({ evenements }) => {
                     </button>
                     {<></>}
                     <button
-                   
+                      onClick={()=>{
+                        const ablurer = document.querySelector("#blurg");
+                        if (
+                          ablurer.classList.contains("blur")){ablurer.classList.remove("blur");} else {
+                            ablurer.classList.add("blur");
+                          };
+                          const nablurer = document.querySelector("#nblurg");
+                        if (
+                          nablurer.classList.contains("aaaaa")){ablurer.classList.remove("aaaaa");} else {
+                            nablurer.classList.add("aaaaa");
+                          }
+                          handleInscrire();
+                      
+                      }}
                       style={{ backgroundColor: "#2E3840" }}
                       className="font-extrabold  cart-btn flex r transition duration-500 ease-in-out px-2 py-2 w-24 self-center ml-[30%]"
                     >
