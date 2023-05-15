@@ -93,7 +93,7 @@ const EvenementsListadmin = ({ evenements }) => {
                     </button>
                     {<></>}
                     <button
-                      onClick={()=>{handleInscrire();const ablurer = document.querySelector("#blur")}}
+                   
                       style={{ backgroundColor: "#2E3840" }}
                       className="font-extrabold  cart-btn flex r transition duration-500 ease-in-out px-2 py-2 w-24 self-center ml-[30%]"
                     >
