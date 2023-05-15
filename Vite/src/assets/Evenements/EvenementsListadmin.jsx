@@ -6,11 +6,25 @@ import placeicon from "../images1/place.svg";
 import { api } from "../../utils/api";
 import { useState } from "react";
 import Inscription from "./Inscription";
+import "../../Evenements.css"
 
+const ablurer =Document.g
 const EvenementsListadmin = ({ evenements }) => {
+  const [showPopup, setShowPopup] = useState(false);
+  const [blurMainPage, setBlurMainPage] = useState(false);
+
+  const openPopup = () => {
+    setShowPopup(true);
+    setBlurMainPage(true);
+  };
+
+  const closePopup = () => {
+    setShowPopup(false);
+    setBlurMainPage(false);
+  };
+
   const navigate = useNavigate("/");
   const archiver = (id) => {
-    console.log("Archiving: ",id);
     const data = {
       id: id,
     };
@@ -22,7 +36,10 @@ const EvenementsListadmin = ({ evenements }) => {
     navigate("/");
   };
   const [inscrire, setInscrire] = useState(false);
+
+  const handleInscrire = () => {setInscrire(true);}
   return (
+    <div className="" id="blurg">
     <div>
       <div className="bg-[#F9DBBB4C] backdrop-blur-sm Navbar z-1 fixed top-4 left-0 right-0 mt-16 flex flex-row justify-between h-16">
         <h1 className="text-[50px] font-black color-[#2E3840] ml-16 mb-4 -mt-2 ">
@@ -34,7 +51,7 @@ const EvenementsListadmin = ({ evenements }) => {
           style={{ backgroundColor: "#2E3840" }}
           className="font-extrabold  cart-btn mr-16  py-2  self-center"
         >
-          Ajouter un évenements
+          Ajouter un évenement
         </Link>
       </div>
       <div className="evenements-list mt-32">
@@ -48,11 +65,8 @@ const EvenementsListadmin = ({ evenements }) => {
                 <div className="flex justify-start w-[100%] rounded mb-12 px-4">
                   <img
                     src={
-                      evenement.id % 3 === 1
-                        ? image1
-                        : evenement.id % 3 === 2
-                        ? image2
-                        : image3
+                      evenement.photoUrl
+
                     }
                     alt=""
                   />
@@ -79,7 +93,20 @@ const EvenementsListadmin = ({ evenements }) => {
                     </button>
                     {<></>}
                     <button
-                      onClick={() => setInscrire(!inscrire)}
+                      onClick={()=>{
+                        const ablurer = document.querySelector("#blurg");
+                        if (
+                          ablurer.classList.contains("blur")){ablurer.classList.remove("blur");} else {
+                            ablurer.classList.add("blur");
+                          };
+                          const nablurer = document.querySelector("#nblurg");
+                        if (
+                          nablurer.classList.contains("aaaaa")){ablurer.classList.remove("aaaaa");} else {
+                            nablurer.classList.add("aaaaa");
+                          }
+                          handleInscrire();
+                      
+                      }}
                       style={{ backgroundColor: "#2E3840" }}
                       className="font-extrabold  cart-btn flex r transition duration-500 ease-in-out px-2 py-2 w-24 self-center ml-[30%]"
                     >
@@ -138,12 +165,8 @@ const EvenementsListadmin = ({ evenements }) => {
                 <div className="flex justify-end w-[100%] rounded mb-12 px-4">
                   <img
                     src={
-                      evenement.id % 3 === 1
-                        ? image1
-                        : evenement.id % 3 === 2
-                        ? image2
-                        : image3
-                    }
+                      evenement.photoUrl
+                                        }
                     alt=""
                   />
                 </div>
@@ -152,6 +175,7 @@ const EvenementsListadmin = ({ evenements }) => {
           </div>
         ))}
       </div>
+    </div>
     </div>
   );
 };

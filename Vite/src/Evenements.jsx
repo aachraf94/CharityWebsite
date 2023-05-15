@@ -4,28 +4,65 @@ import { api } from "./utils/api";
 import EvenementsListadmin from "./assets/Evenements/EvenementsListadmin";
 import EvenementsList from "./assets/Evenements/EvenementsList";
 import EvenementsListmembre from "./assets/Evenements/EvenementsListmembre";
-const Evenements = () => {
-  const [role, setRole] = useState("");
+
+
+
+const Evenements = ({role}) => {
   const [evenements, setEvenements] = useState([]);
+  const [eventswithphoto, setEventswithphoto] = useState([]);
+
+      
+
   useEffect(() => {
-    try {
-      //CHECK IF USER IS LOGGED IN , OR ELSE RETURN KEEP IT VISITOR
-      const data = {
-        email: jwt_decode(localStorage.getItem("token")).user,
-      };
-      api.post("/getrole", data).then((res) => setRole(res.data.role));
-    } catch (err) {
-      setRole("visitor");
-    }
-    api.get("/getEvents").then((res) => setEvenements(res.data));
-    console.log("Ev role:",role);
-}, []);
+  
+  
+    fetch("http://localhost:3030/getEvents", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+    .then(response => response.json())
+    .then(data => {
+    
+      const promises = data.map(evenement => fetchPhotoByTitle(evenement));
+      Promise.all(promises).then(eventwithphoto => {
+        setEventswithphoto(eventwithphoto);
+      });
+      
+
+    })
+    .catch(error => {
+      console.error(error);
+    });
+      },[])
+     
+      const fetchPhotoByTitle = (evenement) => {
+        return fetch(`http://localhost:3030/getphotobytitle`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "title":evenement.title
+          },
+        })
+          .then(response => response.json())
+          .then(data => {
+            return { ...evenement, photoUrl: data.url };
+          })
+          .catch(error => {
+            console.error(error);
+            return { ...evenement, photoUrl: null };
+          });
+      }
+      
   if (role === "ADMIN") {
-    return <EvenementsListadmin evenements={evenements} />;
+    console.log("Amine")
+    return <EvenementsListadmin evenements={ eventswithphoto } />;
   } else if (role === "MEMBRE") {
-    return <EvenementsListmembre evenements={evenements} />;
+    return <EvenementsListmembre evenements={eventswithphoto} />;
   } else {
-    return <EvenementsList evenements={evenements} />;
+    return <EvenementsList evenements={eventswithphoto} />;
   }
 };
 

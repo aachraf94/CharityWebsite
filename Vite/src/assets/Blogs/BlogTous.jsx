@@ -31,7 +31,7 @@ const BlogsTous = () => {
 
   return (
     <div className='flex flex-col '>
-      <div className="titre">
+      <div className="titre mt-[6rem]">
         <h1>Blogs</h1>
       </div>
       <div className="flex evenement-list evenement-listr justify-between mr-8 ml-8 mb-8">

@@ -3,11 +3,17 @@ import './Choice.css';
 import img from './FrontAssets/image login.png'
 import log from './FrontAssets/LOGO.png'
 import { useNavigate } from 'react-router';
+import { useEffect, useState } from 'react';
 
 
 
-function Choice(){
+function Choice({role}){
   let navigate = useNavigate("")
+  const [aff,setAff]=useState()
+  useEffect(()=>{
+   
+    role=="ADMIN" || role=="MEMBER" ?setAff(false): setAff(true);
+  },[])
 return (
     
      <>
@@ -15,9 +21,9 @@ return (
   <img src={log} alt="" classNa="h-8 sm:h-12 md:h-12 lg:h-12 xl:h-12"/>
 </a>
 
-
+{ aff && (
 <div className='relative'>
-      </div>
+      
       <span className='text-white font-normal font-poppins text-base w-240 h-24 absolute top-8 right-52 flex-none order-0 flex-grow-0 ml-8'>Vous n'êtes pas un membre?</span>
       <div className="fixed top-2 right-0 m-4">
       <button onClick={() =>navigate("/register")} className="bg-transparent   rounded-xl border border-solid border-white-300 whitespace-no-wrap text-yellow-300 font-medium px-4 py-2">
@@ -25,7 +31,8 @@ return (
   Rejoignez-Nous
 </button>
 </div>
-
+</div>
+)}
 
 
 <div className="bg-blue-400 h-screen flex justify-center items-center">

@@ -7,25 +7,30 @@ import { useEffect } from 'react';
 const Navbarmembre = () => {
 
 
-  const [url , setUrl ] =  useState("");
-    useEffect(() => {
-      
-      fetch('http://localhost:3030/getphoto', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('accesstoken')}`
-        }
-      })
-        .then(response => response.json())
-    
-    .then(response => {
-     setUrl(response.url)
-    })
-    .catch(error => {
+  const [url, setUrl] = useState("");
+ 
+  useEffect(() => {
+   
+    fetch("http://localhost:3030/getphoto", {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${localStorage.getItem("token")}`,
 
-      console.error(error);
-    });},[])
+  },
+})
+  .then((response) => response.json())
+  .then((response) => {
+    setUrl(response.url);
+     setUrl(response.url);
+
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+
+  },[]);
+  console.log(url)
 
     const handleLogout = async () => {
      
@@ -101,7 +106,7 @@ const Navbarmembre = () => {
     }} className=" text-black hover:text-gray-300 underline underline-offset-8 opacity-90">Afficher profil</Link>
         </li>
         <li className="mr-4">
-            <Link to="#" onClick={()=>{const profila = document.querySelector('#profila');
+            <Link to="/modifierprofil" onClick={()=>{const profila = document.querySelector('#profila');
       profila.classList.add('hidden');
     }} className=" text-black hover:text-gray-300 underline underline-offset-8 opacity-90">Modifier profil</Link>
         </li>

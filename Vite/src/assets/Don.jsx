@@ -90,10 +90,10 @@ function Don({role}) {
                 value={formik.values.numero}
                 onChange={formik.handleChange}
               />
-              <span className="Wilaya  absolute bottom-3 right-[6%] text-gray-400 text-sm duration-500 pointer-events-none">
+              <span className="Wilaya  absolute bottom-3 -right-[2%] text-gray-400 text-sm duration-500 pointer-events-none">
                 Le numéro de votre Carte de débit{" "}
                 <FaRegCreditCard
-                  className="absolute right-56 top-1/2 transform -translate-y-1/2 text-gray-500"
+                  className="absolute right-52 top-1/2 transform -translate-y-1/2 text-gray-500"
                   size={16}
                 />
               </span>
@@ -121,10 +121,10 @@ function Don({role}) {
                 value={formik.values.adresse}
                 onChange={formik.handleChange}
               />
-              <span className="Wilaya absolute bottom-3 left-7 text-gray-400 text-sm duration-500 pointer-events-none">
-                
+              <span className="Wilaya absolute bottom-3 right-[30.5%] text-gray-400 text-sm duration-500 pointer-events-none">
+                Adresse
                 <HiIdentification
-                  className="absolute right-14 top-1/2 transform -translate-y-1/2 text-gray-500"
+                  className="absolute right-12 top-1/2 transform -translate-y-1/2 text-gray-500"
                   size={18}
                 />
               </span>

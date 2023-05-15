@@ -3,10 +3,28 @@ import notification from '../images1/notification.svg';
 import search from '../images1/search.svg';
 import deleter from '../images1/delete.svg'
 import triangle from '../images1/triangle.svg';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Transactions = () => {
     const [isHidden, setIsHidden] = useState(false);
+    const [transactions,setTransactions] = useState([]);
+
+
+    useEffect(() => {
+  
+      fetch("http://localhost:3030/listedons", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+        .then(response => response.json())
+        .then(data => { setTransactions(data)
+       })
+    }, []);
+    
+  
 
     const handleCheckboxChange = () => {
       const checkboxes = document.querySelectorAll("input[type='checkbox']");
@@ -26,48 +44,7 @@ const Transactions = () => {
         });
         handleCheckboxChange(event);
       };
-    const [transactions, setTransactions] = useState([
-        {
-          id: 1,
-          date:'02/02/2023',
-          codeOp:'067HJRG',
-          ccp:'9955286532',
-          nom: 'Bouacha',
-          email: 'lc_bouacha@esi.dz',
-          montant:'+6000,00',
-          solde:'4803,00'
-        },
-        {
-            id: 2,
-            date:'01/01/2022',
-            codeOp:'895VURG',
-            ccp:'5264832895',
-            nom: 'Baiteche',
-            email: 'ls_baiteche@esi.dz',
-            montant:'-3000,00',
-            solde:'2013,00'
-          },
-          {
-            id: 3,
-            date:'02/06/2021',
-            codeOp:'067VHJK',
-            ccp:'5115215634',
-            nom: 'Benyahia',
-            email: 'ly_benyahia@esi.dz',
-            montant:'+2000,00',
-            solde:'6993,00'
-          },
-          {
-            id: 4,
-            date:'21/12/2022',
-            codeOp:'856GHYJ',
-            ccp:'1112225553',
-            nom: 'Melzi',
-            email: 'la_melzi@esi.dz',
-            montant:'+1000,00',
-            solde:'8043,00'
-          }
-      ]);
+    
       const handleAllCheckboxChange = () => {
         handleCheckboxChange();
         handleAllChecked();
@@ -142,13 +119,13 @@ const Transactions = () => {
                     <h2 className="text-[#2E3840] font-semibold text-md ">{transaction.date} </h2>
                     </div>
                     <div className="flex flex-row justify-start items-center mb-2 w-[13%] hidden md:inline-flex">
-                    <h2 className="text-[#2E3840] font-semibold text-md ">{transaction.codeOp}</h2>
+                    <h2 className="text-[#2E3840] font-semibold text-md ">{transaction.code}</h2>
                     </div>
                     <div className="flex flex-row justify-start items-center mb-2 w-[16%] ">
                     <h2 className="text-[#2E3840] font-semibold text-md ">{transaction.ccp}</h2>
                     </div>
                     <div className="flex flex-row justify-start items-center mb-2 w-[13%] ">
-                    <h2 className="text-[#2E3840] font-semibold text-md ">{transaction.nom}</h2>
+                    <h2 className="text-[#2E3840] font-semibold text-md ">{transaction.firstname}</h2>
                     </div>
                     <div className="flex flex-row justify-start items-center mb-2 w-[20%] hidden lg:inline-flex">
                     <h2 className="text-[#2E3840] font-semibold text-md ">{transaction.email}</h2>

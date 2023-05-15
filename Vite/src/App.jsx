@@ -11,7 +11,6 @@ import Apropos from "./assets/Apropos";
 import NavbarMenu from "./assets/Navbar";
 import HP1user from "./assets/Homes/HP1user";
 import jwt_decode from "jwt-decode";
-import Dashboard from "./assets/dashboards/Dashboard";
 import Footer from "./assets/Footer";
 import Profil from "./assets/Profil";
 import { useEffect, useState } from "react";
@@ -33,6 +32,7 @@ import Blogs from "./assets/Blogs/Blogs";
 import Feedback from "./Feedback";
 import ModifierParticipant from "./assets/ModifierParticipant";
 import BlogsTous from "./assets/Blogs/BlogTous";
+import Dashboard from "./assets/dashboards/Dashboard"
 
 
 
@@ -68,7 +68,7 @@ function App() {
           <Route path="/Blogs" element={<><NavbarMenu role={role} /><Blogs role={role}/></>}/>
          <Route path="/login" element={<Login role={role} />} />
           <Route path="/Rejoignez" element={<Register role={role} />} />
-          <Route path="/choice" element={<Choice />} />
+          <Route path="/choice" element={<Choice  role={role}/>} />
           <Route path="/don" element={<Don role={role}/>} />
           <Route path="/deconnexion" element={<Deconnexion />} />
           <Route path="/utilisateurs" element={<Utilisateurs />} />
@@ -84,7 +84,7 @@ function App() {
             element={
               <>
                 <NavbarMenu role={role} />
-                <Evenements />
+                <Evenements role={role} />
                 <Footer />
               </>
             }
@@ -134,6 +134,7 @@ function App() {
               </>
             }
           />
+          <Route path="/*" element={<p>Page not Found</p>} />
         </Routes>
       </Router>
     </>

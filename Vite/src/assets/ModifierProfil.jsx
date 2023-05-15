@@ -18,7 +18,6 @@ function ModifierCompte() {
   const handleSubmit = async () => {
     const formData = new FormData();
     formData.append('photo', file);
-  console.log(formData)
 
     const response = await fetch("http://localhost:3030/uploadphoto", {
       method: "POST",
