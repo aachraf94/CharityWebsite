@@ -1046,14 +1046,17 @@ app.post("/addEvent", async (req, res) => {
         const description = req.body.description;
         const location = req.body.location;
         const photo = req.body.photo;
+        const archive = 0;
         //IF SO THEN INSERT THE EVENT IN DB
         await db
           .promise()
-          .execute("insert into events values(0,?,?,?)", [
+          .execute("insert into events values(0,?,?,?,?,?,?)", [
             title,
             date,
             description,
-            location
+            location,
+            photo,
+            archive
           ]);
 });
 

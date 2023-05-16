@@ -17,10 +17,10 @@ const EvenementsListadmin = ({ evenements }) => {
     };
     api.post("/archiveEvent", data).catch((err) => {
       alert("Erreur!");
-      navigate("/");
+      window.location.href = "/Evenements";
     });
     alert("Bien archivées");
-    navigate("/");
+    window.location.href = "/Evenements";
   };
 
   const [inscrire, setInscrire] = useState(false);

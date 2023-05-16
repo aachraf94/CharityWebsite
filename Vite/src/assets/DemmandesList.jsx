@@ -90,7 +90,7 @@ const DemandesList = () => {
             <div className='flex flex-row justify between mb-4'>
             <div>
               <p className="mb-4 text-2xl font-extrabold  px-2 w-40 py-4">
-              {expandedBlogId && "Nom :"} 
+               Nom : 
               </p>
               <p className="mb-4 text-2xl font-extrabold  px-2 w-40 py-4">
                Prenom : 
