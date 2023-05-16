@@ -22,7 +22,6 @@ const DemandesList = () => {
   }) },[]);
   
   const handleRefus = async (email) => {
-    console.log("Amine");
   
     try {
       await fetch("http://localhost:3030/refuseUser", {
@@ -39,7 +38,6 @@ const DemandesList = () => {
         prevUsers.filter((user) => user.email !== email)
         
       );
-      console.log(users)
     } catch (error) {
       console.error(error);
     }
@@ -47,7 +45,6 @@ const DemandesList = () => {
 
 
   const handleAcceptation = async (email) => {
-    console.log("Amine");
   
     try {
       await fetch("http://localhost:3030/acceptUser", {
@@ -64,7 +61,6 @@ const DemandesList = () => {
         prevUsers.filter((user) => user.email !== email)
         
       );
-      console.log(users)
     } catch (error) {
       console.error(error);
     }
@@ -80,9 +76,6 @@ const DemandesList = () => {
     }
   };
 
-
-console.log(users.length )
-console.log( users + "4654")
   return (
     <div className='mt-24'>
         <h2 style={{fontSize:42 ,font:"bold" }} className="titre p-4 ">Les demandes d'adhesion</h2>
@@ -97,7 +90,7 @@ console.log( users + "4654")
             <div className='flex flex-row justify between mb-4'>
             <div>
               <p className="mb-4 text-2xl font-extrabold  px-2 w-40 py-4">
-               Nom : 
+              {expandedBlogId && "Nom :"} 
               </p>
               <p className="mb-4 text-2xl font-extrabold  px-2 w-40 py-4">
                Prenom : 

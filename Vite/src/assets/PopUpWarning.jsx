@@ -23,7 +23,7 @@ function PopUpWarning() {
   return (
     <>
       {showPopup && (
-        <div className="bg-blue-400 h-screen flex justify-center items-center bg-black">
+        <div className="bg-blue-400 h-screen flex justify-center items-center bg-black opacity-75">
           <div className="box-sizing border-box mx-auto flex flex-col items-center justify-start p-4 md:p-8 gap-4 text-red absolute w-11/12 sm:w-5/6 md:w-2/3 lg:w-1/2 xl:w-2/5 bg-red shadow-lg rounded-lg">
             <div className="flex items-center justify-between w-full border-b-[1px] border-white pb-1 pr-2">
               <h1 className="text-yellow-300 text-2xl relative">

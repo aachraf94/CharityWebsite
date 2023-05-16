@@ -3,16 +3,52 @@ import image1 from '../FrontAssets/images1/Chamel.png';
 import image2 from '../FrontAssets/images1/hands.png';
 import image3 from '../FrontAssets/images1/photo17.png';
 import { Link } from 'react-router-dom';
-import { api } from '../../utils/api';
 
 const BlogsTous = () => {
-    const [blogs,setBlogs] = useState([]);
-    useEffect(()=>{
-        api.get("/getBlogs").then(res=>{
-            setBlogs(res.data);
-        });
-    },[]);
-    console.log("Blog tous:",blogs);
+  
+  const [blogswithphoto,setBlogswithphoto] = useState([]);
+
+  useEffect(() => {
+  
+      
+    fetch("http://localhost:3030/getBlogs", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+    .then(response => response.json())
+    .then(data => {
+    
+      const promises = data.map(blog => fetchPhotoByTitle(blog));
+      Promise.all(promises).then(blogwithphoto => {        
+        setBlogswithphoto(blogwithphoto);
+      });
+    })
+    .catch(error => {
+      console.error(error);
+    });
+      },[])
+     
+      const fetchPhotoByTitle = (blog) => {
+        return fetch(`http://localhost:3030/getphotobyemail`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "email":blog.authorMail
+          },
+        })
+          .then(response => response.json())
+          .then(data => {
+            return { ...blog, photoUrl: data.url };
+          })
+          .catch(error => {
+            console.error(error);
+            return { ...blog, photoUrl: null };
+          });}  
+  
+      
   const [expandedBlogId, setExpandedBlogId] = useState(null);
 
   const handleBlogExpand = (blogId) => {
@@ -25,8 +61,8 @@ const BlogsTous = () => {
 
   // Create an array of arrays, with each nested array containing three blogs
   const groupedBlogs = [];
-  for (let i = 0; i < blogs.length; i += 3) {
-    groupedBlogs.push(blogs.slice(i, i + 3));
+  for (let i = 0; i < blogswithphoto.length; i += 3) {
+    groupedBlogs.push(blogswithphoto.slice(i, i + 3));
   }
 
   return (
@@ -46,12 +82,9 @@ const BlogsTous = () => {
                 <div className="flex flex-row justify-start px-2 w-full">
                   <div className="w-[50px] h-[50px]">
                     <img
+                      style={{ width: '58px', height: '50px' }}
                       src={
-                        blog.id % 3 === 1
-                          ? image1
-                          : blog.id % 3 === 2
-                          ? image2
-                          : image3
+                       blog.photoUrl
                       }
                       alt=""
                       className="py-1  rounded-full"

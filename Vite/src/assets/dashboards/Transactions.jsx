@@ -9,10 +9,9 @@ const Transactions = () => {
     const [isHidden, setIsHidden] = useState(false);
     const [transactions,setTransactions] = useState([]);
 
-
     useEffect(() => {
   
-      fetch("http://localhost:3030/listedons", {
+      fetch("http://localhost:3030/listetransactions", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -24,7 +23,83 @@ const Transactions = () => {
        })
     }, []);
     
-  
+  const handleDate = async () => {
+    fetch("http://localhost:3030/tridatetran", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+      .then(response => response.json())
+      .then(data => {
+         setTransactions(data)
+        
+      });
+  }
+
+
+  const handleCode = async () => {
+    fetch("http://localhost:3030/tricodeoptran", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+      .then(response => response.json())
+      .then(data => {
+         setTransactions(data)
+        
+      });
+  }
+
+
+  const handleCcp = async () => {
+    fetch("http://localhost:3030/triccptran", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+      .then(response => response.json())
+      .then(data => {
+         setTransactions(data)
+        
+      });
+  }
+
+  const handleNom = async () => {
+    fetch("http://localhost:3030/trinomtran", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+      .then(response => response.json())
+      .then(data => {
+         setTransactions(data)
+        
+      });
+  }
+
+
+  const handleEmail = async () => {
+    fetch("http://localhost:3030/triemailtran", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+      .then(response => response.json())
+      .then(data => {
+         setTransactions(data)
+        
+      });
+  }
 
     const handleCheckboxChange = () => {
       const checkboxes = document.querySelectorAll("input[type='checkbox']");
@@ -49,6 +124,8 @@ const Transactions = () => {
         handleCheckboxChange();
         handleAllChecked();
       };
+
+
     return ( 
         <div>
             <div className="flex flex-row bg-[#F5F5F5]">
@@ -88,23 +165,23 @@ const Transactions = () => {
                     </div>
                     <div className="flex flex-row justify-start items-center mb-2 w-[15%]">
                     <h2 className="text-white font-semibold text-md ">Date  </h2>
-                    <img src={triangle}></img>
+                    <button onClick={handleDate} ><img src={triangle}></img></button>
                     </div>
                     <div className="flex flex-row justify-start items-center mb-2 w-[13%] hidden md:inline-flex">
                     <h2 className="text-white font-semibold text-md ">Code Op</h2>
-                    <img src={triangle}></img>
+                   <button onClick={handleCode}> <img src={triangle}></img></button>
                     </div>
                     <div className="flex flex-row justify-start items-center mb-2 w-[16%] ">
                     <h2 className="text-white font-semibold text-md ">CCP</h2>
-                    <img src={triangle}></img>
+                    <button onClick={handleCcp} > <img src={triangle}></img></button>
                     </div>
                     <div className="flex flex-row justify-start items-center mb-2 w-[13%] ">
                     <h2 className="text-white font-semibold text-md ">Nom</h2>
-                    <img src={triangle}></img>
+                    <button onClick={handleNom} > <img src={triangle}></img></button>
                     </div>
                     <div className="flex flex-row justify-start items-center mb-2 w-[20%] hidden lg:inline-flex">
                     <h2 className="text-white font-semibold text-md ">Email</h2>
-                    <img src={triangle}></img>
+                    <button onClick={handleEmail} > <img src={triangle}></img></button>
                     </div>
                     <h2 className="text-white font-semibold text-md mb-2 w-[15%] ">Montant</h2>
                     <h2 className="text-white font-semibold text-md mb-2 w-[12%]" >Solde</h2>
@@ -116,21 +193,21 @@ const Transactions = () => {
                     <input type="checkbox" onChange={handleAllCheckboxChange} className="maincheck ml-4 mb-2 " ></input>
                     </div>
                     <div className="flex flex-row justify-start items-center mb-2 w-[15%]">
-                    <h2 className="text-[#2E3840] font-semibold text-md ">{transaction.date} </h2>
+                    <h2 className="text-[#2E3840] font-semibold text-md ">{transaction.createdat} </h2>
                     </div>
                     <div className="flex flex-row justify-start items-center mb-2 w-[13%] hidden md:inline-flex">
-                    <h2 className="text-[#2E3840] font-semibold text-md ">{transaction.code}</h2>
+                    <h2 className="text-[#2E3840] font-semibold text-md ">{transaction.code_op}</h2>
                     </div>
                     <div className="flex flex-row justify-start items-center mb-2 w-[16%] ">
                     <h2 className="text-[#2E3840] font-semibold text-md ">{transaction.ccp}</h2>
                     </div>
                     <div className="flex flex-row justify-start items-center mb-2 w-[13%] ">
-                    <h2 className="text-[#2E3840] font-semibold text-md ">{transaction.firstname}</h2>
+                    <h2 className="text-[#2E3840] font-semibold text-md ">{transaction.nom}</h2>
                     </div>
                     <div className="flex flex-row justify-start items-center mb-2 w-[20%] hidden lg:inline-flex">
                     <h2 className="text-[#2E3840] font-semibold text-md ">{transaction.email}</h2>
                     </div>
-                    <h2 className="font-semibold text-md mb-2 w-[15%]" style={{ color: transaction.montant.startsWith('+') ? '#2ECC71' : '#F60505' }}>{transaction.montant}</h2>
+                    <h2 className="font-semibold text-md mb-2 w-[15%]" style={{ color: transaction.solde.startsWith('+') ? '#2ECC71' : '#F60505' }}>{transaction.quantite}</h2>
                     <h2 className="text-[#2E3840] font-semibold text-md mb-2 w-[12%]" >{transaction.solde}</h2>
                     </div>
                       ))}

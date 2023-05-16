@@ -61,8 +61,8 @@ const Slider2 = ({ evenements }) => {
 
                   <div className="card-content">
                       <h1 className="name">Besoin</h1>
-                      <p className="description">The lorem text the section that contains header with having open functionality.</p>
-                    <Link to="/Besoins">
+                      <p className="description">Les familles ayant des difficultés financières peuvent éprouver des difficultés à payer leurs factures, à acheter de la nourriture et des fournitures de base, ou à accéder aux soins de santé et à l'éducation.</p>
+                    <Link to="/Nosbesoins">
                       <button className="button  transition duration-500 ease-in-out">Voir plus</button>
                       </Link>
                   </div>
@@ -77,9 +77,9 @@ const Slider2 = ({ evenements }) => {
 
                   <div className="card-content">
                       <h1 className="name">Besoin</h1>
-                      <p className="description">The lorem text the section that contains header with having open functionality.</p>
+                      <p className="description">Les analgésiques : ces médicaments sont utilisés pour soulager la douleur. Ils peuvent être prescrits pour des maux de tête, des douleurs articulaires ou musculaires, ou des douleurs chroniques. Les analgésiques les plus courants sont le paracétamol, l'ibuprofène et l'aspirine.Les antibiotiques : ces médicaments sont utilisés pour traiter les infections bactériennes.</p>
 
-                      <Link to="/Besoins">
+                      <Link to="/Nosbesoins">
                       <button className="button  transition duration-500 ease-in-out">Voir plus</button>
                       </Link>                  </div>
               </div></SwiperSlide>
@@ -93,9 +93,9 @@ const Slider2 = ({ evenements }) => {
 
                   <div className="card-content">
                       <h1 className="name">Besoin</h1>
-                      <p className="description">The lorem text the section that contains header with having open functionality.</p>
+                      <p className="description">Des vêtements pour un orphelinat doivent être confortables, durables et pratiques pour les enfants. Ils doivent également être adaptés à différentes saisons et activités.</p>
 
-                      <Link to="/Besoins">
+                      <Link to="/Nosbesoins">
                       <button className="button  transition duration-500 ease-in-out">Voir plus</button>
                       </Link>                  </div>
               </div></SwiperSlide>
@@ -109,9 +109,9 @@ const Slider2 = ({ evenements }) => {
 
                   <div className="card-content">
                       <h1 className="name">Besoin</h1>
-                      <p className="description">The lorem text the section that contains header with having open functionality.</p>
+                      <p className="description">Les familles ayant des difficultés financières peuvent éprouver des difficultés à payer leurs factures, à acheter de la nourriture et des fournitures de base, ou à accéder aux soins de santé et à l'éducation.</p>
 
-                      <Link to="/Besoins">
+                      <Link to="/Nosbesoins">
                       <button className="button  transition duration-500 ease-in-out">Voir plus</button>
                       </Link>                  </div>
               </div></SwiperSlide>
@@ -125,16 +125,16 @@ const Slider2 = ({ evenements }) => {
 
                   <div className="card-content">
                       <h1 className="name">Besoin</h1>
-                      <p className="description">The lorem text the section that contains header with having open functionality.</p>
+                      <p className="description">Les analgésiques : ces médicaments sont utilisés pour soulager la douleur. Ils peuvent être prescrits pour des maux de tête, des douleurs articulaires ou musculaires, ou des douleurs chroniques. Les analgésiques les plus courants sont le paracétamol, l'ibuprofène et l'aspirine.Les antibiotiques : ces médicaments sont utilisés pour traiter les infections bactériennes.</p>
 
-                      <Link to="/Besoins">
+                      <Link to="/Nosbesoins">
                       <button className="button  transition duration-500 ease-in-out">Voir plus</button>
                       </Link>                  </div>
               </div></SwiperSlide>
       </Swiper>
   </div>
   </div>
-  <Link to="/Besoins">
+  <Link to="/Nosbesoins">
   <h2 className='titre2 underline underline-offset-8'>Voir plus</h2>
   </Link>
     </div>

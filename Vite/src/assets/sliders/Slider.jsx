@@ -61,7 +61,7 @@ const Slider = ({ evenements }) => {
 
                   <div className="card-content">
                       <h1 className="name">Evenement</h1>
-                      <p className="description">The lorem text the section that contains header with having open functionality.</p>
+                      <p className="description">Rejoignez-nous lors de notre événement spécial de collecte de vêtements d'hiver pour les personnes dans le besoin. Nous sommes conscients que l'hiver peut être une période difficile pour ceux qui sont confrontés à des situations de précarité, et nous cherchons à leur apporter un peu de chaleur et de réconfort.</p>
                         <Link to="/Evenements" >
                       <button className="button  transition duration-500 ease-in-out">Voir plus</button>
                       </Link>
@@ -77,7 +77,7 @@ const Slider = ({ evenements }) => {
 
                   <div className="card-content">
                       <h1 className="name">Evenement</h1>
-                      <p className="description">The lorem text the section that contains header with having open functionality.</p>
+                      <p className="description">En cette période sacrée du mois de Ramadan, nous vous invitons à participer à notre événement de collecte de produits alimentaires destiné à soutenir ceux qui sont dans le besoin. Ramadan est un mois de générosité, de partage et de solidarité, et nous souhaitons créer une atmosphère bienveillante où personne ne soit laissé de côté.</p>
                       <Link to="/Evenements" >
                       <button className="button  transition duration-500 ease-in-out">Voir plus</button>
                       </Link>
@@ -93,7 +93,7 @@ const Slider = ({ evenements }) => {
 
                   <div className="card-content">
                       <h1 className="name">Evenement</h1>
-                      <p className="description">The lorem text the section that contains header with having open functionality.</p>
+                      <p className="description">Nous sommes ravis de vous inviter à notre événement spécial de dîner public (Iftar) en ce mois béni de Ramadan. Cet événement vise à rassembler la communauté dans un esprit de partage, de fraternité et de générosité.</p>
                       <Link to="/Evenements" >
                       <button className="button  transition duration-500 ease-in-out">Voir plus</button>
                       </Link>
@@ -109,7 +109,7 @@ const Slider = ({ evenements }) => {
 
                   <div className="card-content">
                       <h1 className="name">Evenement</h1>
-                      <p className="description">The lorem text the section that contains header with having open functionality.</p>
+                      <p className="description">En cette période sacrée du mois de Ramadan, nous vous invitons à participer à notre événement de collecte de produits alimentaires destiné à soutenir ceux qui sont dans le besoin. Ramadan est un mois de générosité, de partage et de solidarité, et nous souhaitons créer une atmosphère bienveillante où personne ne soit laissé de côté.</p>
                       <Link to="/Evenements" >
                       <button className="button  transition duration-500 ease-in-out">Voir plus</button>
                       </Link>
@@ -125,7 +125,7 @@ const Slider = ({ evenements }) => {
 
                   <div className="card-content">
                       <h1 className="name">Evenement</h1>
-                      <p className="description">The lorem text the section that contains header with having open functionality.</p>
+                      <p className="description">Nous sommes ravis de vous inviter à notre événement spécial de dîner public (Iftar) en ce mois béni de Ramadan. Cet événement vise à rassembler la communauté dans un esprit de partage, de fraternité et de générosité.</p>
                       <Link to="/Evenements" >
                       <button className="button  transition duration-500 ease-in-out">Voir plus</button>
                       </Link>

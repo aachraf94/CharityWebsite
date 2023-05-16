@@ -90,7 +90,7 @@ const Footer = () => {
           <Link to="/Apropos">
             <p className="px-4 md:px-16 py-1 hover:text-gray-300">News</p>
           </Link>
-          <Link to="/BlogsTous">
+          <Link to="/TousBlogs">
             <p className="px-4 md:px-16 py-1 hover:text-gray-300">Blogs</p>
           </Link>
         </div>

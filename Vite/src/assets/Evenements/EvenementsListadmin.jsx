@@ -8,22 +8,9 @@ import { useState } from "react";
 import Inscription from "./Inscription";
 import "../../Evenements.css"
 
-const ablurer =Document.g
 const EvenementsListadmin = ({ evenements }) => {
-  const [showPopup, setShowPopup] = useState(false);
-  const [blurMainPage, setBlurMainPage] = useState(false);
-
-  const openPopup = () => {
-    setShowPopup(true);
-    setBlurMainPage(true);
-  };
-
-  const closePopup = () => {
-    setShowPopup(false);
-    setBlurMainPage(false);
-  };
-
   const navigate = useNavigate("/");
+  
   const archiver = (id) => {
     const data = {
       id: id,
@@ -35,11 +22,11 @@ const EvenementsListadmin = ({ evenements }) => {
     alert("Bien archivées");
     navigate("/");
   };
-  const [inscrire, setInscrire] = useState(false);
 
-  const handleInscrire = () => {setInscrire(true);}
+  const [inscrire, setInscrire] = useState(false);
+  const[selectedEventId,setSelectedEventId] = useState(0);
   return (
-    <div className="" id="blurg">
+    <div className="" >
     <div>
       <div className="bg-[#F9DBBB4C] backdrop-blur-sm Navbar z-1 fixed top-4 left-0 right-0 mt-16 flex flex-row justify-between h-16">
         <h1 className="text-[50px] font-black color-[#2E3840] ml-16 mb-4 -mt-2 ">
@@ -85,34 +72,16 @@ const EvenementsListadmin = ({ evenements }) => {
                   </p>
                   <p className="font-black">{evenement.description}</p>
                   <div className="flex space-x-2 mt-6">
-                    <button
-                      style={{ backgroundColor: "#2E3840" }}
-                      className="font-extrabold  cart-btn flex transition duration-500 ease-in-out px-2 py-2 w-24 self-center ml-[30%]"
-                    >
-                      Voir Plus
-                    </button>
+                  
                     {<></>}
                     <button
-                      onClick={()=>{
-                        const ablurer = document.querySelector("#blurg");
-                        if (
-                          ablurer.classList.contains("blur")){ablurer.classList.remove("blur");} else {
-                            ablurer.classList.add("blur");
-                          };
-                          const nablurer = document.querySelector("#nblurg");
-                        if (
-                          nablurer.classList.contains("aaaaa")){ablurer.classList.remove("aaaaa");} else {
-                            nablurer.classList.add("aaaaa");
-                          }
-                          handleInscrire();
-                      
-                      }}
+                      onClick={()=>{setInscrire(!inscrire);setSelectedEventId(evenement.id)}}
                       style={{ backgroundColor: "#2E3840" }}
                       className="font-extrabold  cart-btn flex r transition duration-500 ease-in-out px-2 py-2 w-24 self-center ml-[30%]"
                     >
                       Inscrire
                     </button>
-                    {inscrire && <Inscription event_id={evenement.id}/>}
+                    {inscrire && <Inscription event_id={selectedEventId}/>}
                     <button
                       onClick={() => archiver(evenement.id)}
                       style={{ backgroundColor: "#2E3840" }}
@@ -139,20 +108,15 @@ const EvenementsListadmin = ({ evenements }) => {
                   </p>
                   <p className="font-black">{evenement.description}</p>
                   <div className="flex space-x-2 mt-6">
-                  <button
-                      style={{ backgroundColor: "#2E3840" }}
-                      className="font-extrabold  cart-btn flex transition duration-500 ease-in-out px-2 py-2 w-24 self-center ml-[30%]"
-                    >
-                      Voir Plus
-                    </button>
+                
                     <button
-                      onClick={() => setInscrire(!inscrire)}
+                      onClick={() => {setInscrire(!inscrire);setSelectedEventId(evenement.id)}}
                       style={{ backgroundColor: "#2E3840" }}
                       className="font-extrabold  cart-btn flex r transition duration-500 ease-in-out px-2 py-2 w-24 self-center ml-[30%]"
                     >
                       Inscrire
                     </button>
-                    {inscrire && <Inscription event_id={evenement.id}/>}
+                    {inscrire && <Inscription event_id={selectedEventId}/>}
                     <button
                       onClick={() => archiver(evenement.id)}
                       style={{ backgroundColor: "#2E3840" }}

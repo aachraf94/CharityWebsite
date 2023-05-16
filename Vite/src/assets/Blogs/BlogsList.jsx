@@ -1,9 +1,13 @@
-import { useState } from 'react';
-import image1 from '../images1/Chamel.png';
-import image2 from '../images1/hands.png';
-import image3 from '../images1/photo17.png';
+import { useEffect, useState } from "react";
+import image1 from "../images1/Chamel.png";
+import image2 from "../images1/hands.png";
+import image3 from "../images1/photo17.png";
+import { Link } from "react-router-dom";
 
-const BlogsList = ({ blogs }) => {
+const BlogsListadmin = ({ blogs }) => {
+
+
+  
   const [expandedBlogId, setExpandedBlogId] = useState(null);
 
   const handleBlogExpand = (blogId) => {
@@ -14,89 +18,114 @@ const BlogsList = ({ blogs }) => {
     }
   };
 
+
+
   return (
-    
-    <div className="flex justify-between mt-24 mb-16">
-        <div className="flex flex-col w-2/3">
-        {expandedBlogId !== null && (
-          <div className="expanded-blog p-4 rounded-lg">
-            <div
-            className="evenement-preview  mt-4 rounded-xl"
-            key={blogs.find((blog) => blog.id === expandedBlogId).id}
-          >
-            <div className="flex flex-row justify-start px-12 w-full">
-              <div className='w-[60px] h-[60px] '> 
-              <img
-                src={
-                    blogs.find((blog) => blog.id === expandedBlogId).id % 3 === 1 ? image1 : blogs.find((blog) => blog.id === expandedBlogId).id % 3 === 2 ? image2 : image3
-                }
-                alt=""
-                className="py-1  rounded-full"
-              />
-              </div>
-              <p className="font-semibold py-2 px-4 flex mt-4 text-xl">{blogs.find((blog) => blog.id === expandedBlogId).authorMail}</p>
-              <p className="font-bold py-3 px-4 flex mt-3 text-xl">{blogs.find((blog) => blog.id === expandedBlogId).timestamp.split(" ")[0]}</p>
-            </div>
-            </div>
-            <h2 className="text-6xl font-bold  px-8  mb-8 mt-8">
-              {blogs.find((blog) => blog.id === expandedBlogId).title}
-            </h2>
-            <p className="mb-4 text-2xl font-semibold font-popins px-8 py-4">
-              {blogs.find((blog) => blog.id === expandedBlogId).content}
-            </p>
-            <div className='flex justify-center'>
-            <button
-              style={{ backgroundColor: '#2E3840' }}
-              className="font-extrabold mt-6 cart-btn  transition duration-500 ease-in-out px-2 py-2 w-24 self-center ml-[30%]"
-              onClick={() => handleBlogExpand(expandedBlogId)}
-            >
-              Masquer
-            </button>
-            </div>
-          </div>
-        )}
-      </div>
-      <div className="flex flex-col evenements-list w-max mr-4">
-        {blogs.map((blog) => (
-          <div
-            style={{ backgroundColor: '#F9DBBB4C' }}
-            className="evenement-preview p-4 mt-4 rounded-md"
-            key={blog.id}
-          >
-            <div className="flex flex-row justify-start px-2 w-full">
-              <div className='w-[50px] h-[50px]'> 
-              <img
-                src={
-                  blog.id % 3 === 1 ? image1 : blog.id % 3 === 2 ? image2 : image3
-                }
-                alt=""
-                className="py-1  rounded-full"
-              />
-              </div>
-              <p className="font-semibold py-4 px-4 flex">{blog.authorMail}</p>
-              <p className="font-bold py-4 px-4 flex">{blog.timestamp.split(" ")[0]}</p>
-            </div>
-            <div className="px-2 py-2 w-120">
-              <h2
-                style={{ color: '#2E3840' }}
-                className="text-2xl font-black py-2 w-80 mb-8"
-              >
-                {blog.title}
-              </h2>
-              <button
-                style={{ backgroundColor: '#2E3840' }}
-                className="font-extrabold mt-4 cart-btnn flex justify-center transition duration-500 ease-in-out px-2 py-2 w-32"
-                onClick={() => handleBlogExpand(blog.id)}
-              >
-                Voir Plus
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
+    <div>
       
+      <div>
+        <div className="flex justify-between mt-24 mb-16">
+          <div className="flex flex-col w-2/3">
+            {expandedBlogId !== null && (
+              <div className="expanded-blog p-4 rounded-lg">
+                <div
+                  className="evenement-preview  mt-4 rounded-xl"
+                  key={blogs.find((blog) => blog.id === expandedBlogId).id}
+                >
+                  <div className="flex flex-row justify-start px-12 w-full">
+                    <div className="w-[60px] h-[60px] ">
+                      <img
+                        style={{ width: '58px', height: '50px' }}
+                        src={
+                          blogs.find((blog) => blog.id === expandedBlogId).photoUrl
+                        }
+                        alt=""
+                        className="py-1  rounded-full"
+                      />
+                    </div>
+                    <p className="font-semibold py-2 px-4 flex mt-4 text-xl">
+                      {
+                        blogs.find((blog) => blog.id === expandedBlogId)
+                          .authorMail
+                      }
+                    </p>
+                    <p className="font-bold py-3 px-4 flex mt-3 text-xl">
+                      {
+                        blogs
+                          .find((blog) => blog.id === expandedBlogId)
+                          .timestamp.split(" ")[0]
+                      }
+                    </p>
+                  </div>
+                </div>
+                <h2 className="text-6xl font-bold  px-8  mb-8 mt-8">
+                  {blogs.find((blog) => blog.id === expandedBlogId).title}
+                </h2>
+                <p className="mb-4 text-2xl font-semibold font-popins px-8 py-4">
+                  {blogs.find((blog) => blog.id === expandedBlogId).content}
+                </p>
+                <div className="flex justify-center">
+                  <button
+                    style={{ backgroundColor: "#2E3840" }}
+                    className="font-extrabold mt-6 cart-btn flex justify-center transition duration-500 ease-in-out px-2 py-2 w-24 self-center ml-[30%]"
+                    onClick={() => handleBlogExpand(expandedBlogId)}
+                  >
+                    Masquer
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+          <div className="flex flex-col evenements-list w-max mr-4">
+            {blogs.map((blog) => (
+              <div
+                style={{ backgroundColor: "#F9DBBB4C" }}
+                className="evenement-preview p-4 mt-4 rounded-md"
+                key={blog.id}
+              >
+                <div className="flex flex-row justify-start px-2 w-full">
+                  <div className="w-[50px] h-[50px]">
+                  <img
+  src={blog.photoUrl}
+  alt=""
+  className="py-1 rounded-full"
+  style={{ width: '58px', height: '50px' }}
+/>
+
+                  </div>
+                  <p className="font-semibold py-4 px-4 flex">
+                    {blog.authorMail}
+                  </p>
+                  <p className="font-bold py-4 px-4 flex">
+                    {blog.timestamp.split(" ")[0]}
+                  </p>
+                </div>
+                <div className="px-2 py-2 w-120">
+                  <h2
+                    style={{ color: "#2E3840" }}
+                    className="text-2xl font-black py-2 w-80 mb-8"
+                  >
+                    {blog.title}
+                  </h2>
+                  <div className="flex justify-center mt-6">
+                  <button
+  style={{ backgroundColor: "#2E3840", whiteSpace: "nowrap" }}
+  className="font-extrabold cart-btnn flex transition duration-500 ease-in-out px-1 py-2 w-36 self-center ml-[30%]"
+  onClick={() => handleBlogExpand(blog.id)}
+>
+  Voir Plus
+</button>
+
+                    
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default BlogsList
+export default BlogsListadmin;
