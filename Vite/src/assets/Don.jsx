@@ -38,7 +38,6 @@ function Don({role}) {
     role=="ADMIN" || role=="MEMBER" ?setAff(false): setAff(true);
   },[])
 
-  console.log(role)
   return (
     <>
       <Link

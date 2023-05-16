@@ -31,7 +31,6 @@ function Besoin({role}) {
         window.location.href = "/Apropos";
       } catch (err) {
         if (err.response.status === 404) {
-          console.log("RERERE");
           alert("Email does not exist!");
         } else {
           alert("Wrong password check again...");

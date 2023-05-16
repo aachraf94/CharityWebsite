@@ -4,7 +4,6 @@ import NavbarMenu from "./Navbar";
 
 
 function Register  ({ role })  {
-  console.log("Register: ",role);
     if (role !== "ADMIN" && role !== "MEMBRE") return <Reg />
     else return <><HP1user /><NavbarMenu role={role} /></>
   }

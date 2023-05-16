@@ -28,7 +28,6 @@ function ModifierCompte() {
     });
   
     const data = await response.json();
-    console.log(data);
   }
     
     
@@ -125,56 +124,11 @@ function ModifierCompte() {
                     Email
                   </span>
                 </div>
-                <div className="relative w-full mb-4 flex justify-between items-center">
-                  <input
-                    className="w-full h-8 bg-transparent mt-6 border-b-2 border-gray-300 focus:outline-none focus:border-blue-500 focus:text-black"
-                    type={showPassword1 ? "text" : "password"}
-                    placeholder=""
-                    id="password"
-                    
-                  />
-                  <span className="Wilaya absolute bottom-3 left-7 text-gray-400 text-sm duration-500 pointer-events-none">
-                    Mot de passe
-                  </span>
-                  <button
-                    className="  absolute top-4 right-2 p-2"
-                    onClick={handleShowPassword1}
-                    type="button"
-                  >
-                    {showPassword1 ? (
-                      <FaEyeSlash className="h-6 w-6 text-gray-500" />
-                    ) : (
-                      <FaEye className="h-6 w-6 text-gray-500" />
-                    )}
-                  </button>
-                </div>
 
-                <div className="relative w-full mb-4 flex justify-between items-center">
-                  <input
-                    className="w-full h-8 bg-transparent mt-6 border-b-2 border-gray-300 focus:outline-none focus:border-blue-500 focus:text-black"
-                    type={showPassword2 ? "text" : "password"}
-                    placeholder=""
-                    id="confirm"
-                    
-                  />
-                  <span className="Wilaya absolute bottom-3 left-7 text-gray-400 text-sm duration-500 pointer-events-none">
-                    Nouveau mot de passe
-                  </span>
-                  <button
-                    className="  absolute top-4 right-2 p-2"
-                    onClick={handleShowPassword2}
-                    type="button"
-                  >
-                    {showPassword2 ? (
-                      <FaEyeSlash className="h-6 w-6 text-gray-500" />
-                    ) : (
-                      <FaEye className="h-6 w-6 text-gray-500" />
-                    )}
-                  </button>
-                </div>
 
                 <div class="flex flex-col 4 justify-center items-center md:flex-row md:justify-center md:items-center p-4 md:p-8 gap-4 md:gap-8 w-full md:w-auto h-auto md:h-71 bg-gray-800 md:bg-transparent shadow-lg md:shadow-none rounded-lg md:rounded-none"></div>
               </div>
+              <Link to="/" >
               <button
                 type="submit"
                 onClick={handleSubmit}
@@ -182,6 +136,7 @@ function ModifierCompte() {
               >
                 sauvegarder
               </button>
+              </Link>
             </div>
 
         </div>

@@ -1,9 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import image1 from "../images1/Chamel.png";
 import image2 from "../images1/hands.png";
 import image3 from "../images1/photo17.png";
+import { Link } from "react-router-dom";
 
 const BlogsListadmin = ({ blogs }) => {
+
+
+  
   const [expandedBlogId, setExpandedBlogId] = useState(null);
 
   const handleBlogExpand = (blogId) => {
@@ -14,19 +18,22 @@ const BlogsListadmin = ({ blogs }) => {
     }
   };
 
+
+
   return (
     <div>
       <div className="bg-[#F9DBBB4C] backdrop-blur-sm Navbar z-1 fixed top-4 left-0 right-0 mt-16 flex flex-row justify-between h-16">
         <h1 className="text-[50px] font-black color-[#2E3840] ml-16 mb-4 ">
           Blogs
         </h1>
-
+< Link to ="/Ajouterblog" >
         <button
           style={{ backgroundColor: "#2E3840" }}
-          className="font-extrabold  cart-btnn mr-16  py-2  self-center"
+          className="font-extrabold  cart-btnn mr-16 mt-2  py-2  self-center"
         >
           Ajouter un blog
         </button>
+        </Link>
       </div>
       <div>
         <div className="flex justify-between mt-40 mb-16">
@@ -40,17 +47,9 @@ const BlogsListadmin = ({ blogs }) => {
                   <div className="flex flex-row justify-start px-12 w-full">
                     <div className="w-[60px] h-[60px] ">
                       <img
+                        style={{ width: '58px', height: '50px' }}
                         src={
-                          blogs.find((blog) => blog.id === expandedBlogId).id %
-                            3 ===
-                          1
-                            ? image1
-                            : blogs.find((blog) => blog.id === expandedBlogId)
-                                .id %
-                                3 ===
-                              2
-                            ? image2
-                            : image3
+                          blogs.find((blog) => blog.id === expandedBlogId).photoUrl
                         }
                         alt=""
                         className="py-1  rounded-full"
@@ -98,17 +97,13 @@ const BlogsListadmin = ({ blogs }) => {
               >
                 <div className="flex flex-row justify-start px-2 w-full">
                   <div className="w-[50px] h-[50px]">
-                    <img
-                      src={
-                        blog.id % 3 === 1
-                          ? image1
-                          : blog.id % 3 === 2
-                          ? image2
-                          : image3
-                      }
-                      alt=""
-                      className="py-1  rounded-full"
-                    />
+                  <img
+  src={blog.photoUrl}
+  alt=""
+  className="py-1 rounded-full"
+  style={{ width: '58px', height: '50px' }}
+/>
+
                   </div>
                   <p className="font-semibold py-4 px-4 flex">
                     {blog.authorMail}
@@ -125,13 +120,14 @@ const BlogsListadmin = ({ blogs }) => {
                     {blog.title}
                   </h2>
                   <div className="flex justify-center mt-6">
-                    <button
-                      style={{ backgroundColor: "#2E3840" }}
-                      className="font-extrabold  cart-btnn flex  transition duration-500 ease-in-out px-1 py-2 w-36 self-center ml-[30%]"
-                      onClick={() => handleBlogExpand(blog.id)}
-                    >
-                      Voir Plus
-                    </button>
+                  <button
+  style={{ backgroundColor: "#2E3840", whiteSpace: "nowrap" }}
+  className="font-extrabold cart-btnn flex transition duration-500 ease-in-out px-1 py-2 w-36 self-center ml-[30%]"
+  onClick={() => handleBlogExpand(blog.id)}
+>
+  Voir Plus
+</button>
+
                     <button
                       style={{ backgroundColor: "#2E3840" }}
                       className="font-extrabold  cart-btnn flex transition duration-500 ease-in-out px-1 py-2 w-24 self-center ml-[30%]"

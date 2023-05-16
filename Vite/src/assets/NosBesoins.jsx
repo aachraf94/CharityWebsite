@@ -8,12 +8,9 @@ const NosBesoins = ({ role }) => {
   useEffect(() => {
     api.get("/getBesoins").then((res) => {
       setBesoins(res.data);
-      console.log("besoins: ", besoins);
     });
   }, []);
-  console.log("Role besoins: ", role);
   if (role === "ADMIN") {
-    console.log("admin = ");
      return( <BesoinsListadmin besoins={besoins} />);
   } else if (role === "MEMBRE") {
     return(<BesoinsListmembre besoins={besoins} />);

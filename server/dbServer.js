@@ -59,6 +59,7 @@ app.listen(port, () => console.log(`Server Started on port ${port}...`));
 //GET BLOGS
 app.get("/getBlogs", async (req, res) => {
   const [rows, fields] = await db.promise().execute("select * from blogs");
+
   return res.send(rows);
 });
 
@@ -72,7 +73,7 @@ app.get("/getBlogs", async (req, res) => {
     .promise()
     .execute("select * from users where email = ?", [email]);
   if (rows.length == 0) return res.sendStatus(404);
-  console.log(`email: ${email}, role: ${rows[0].role}`);
+
   res.send({ role : rows[0].role }); // send the userrole variable as a JSON object
 });
 // LOGIN API (AUTHENTICATE USER)
@@ -91,7 +92,7 @@ app.post("/login", async (req, res) => {
       .promise()
       .execute("Select * from users where email = ?", [user]);
     if (rows.length == 0) {
-      console.log("----->User does not exist");
+
       res.sendStatus(404);
     } else {
       //comparing the passwords using bcrypt.compare()
@@ -167,7 +168,6 @@ app.post("/getrole", async (req, res) => {
     .execute("select * from users where email = ?", [email]);
 
   if (rows.length == 0) return res.json({ role: "visitor" });
-  console.log(`email: ${email}, role: ${rows[0].role}`);
   res.json({ role: rows[0].role }); // send the userrole variable as a JSON object
 });
 
@@ -193,39 +193,104 @@ app.get("/getphoto", async (req, res) => {
   }
 });
 
-app.get("/listedons", async(req,res) => {
-  const token = req.headers["authorization"].split(" ")[1];
-  if (token == null) return res.sendStatus(401);
-  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-    if (err) return res.sendStatus(403);
-    if (user == null) {
-      return res.sendStatus(403);
-    }
-    req.user = user;
-  });
-  if (req.user == null) return res.sendStatus(404);
-  const [rows, fields] = await db
-    .promise()
-    .execute("select * from users where email =?", [req.user.user]);
-  if (rows.length == 0) {
-    return res.sendStatus(403);
-  } else {
-    if (rows[0].role === "ADMIN") {
-      // check if the request sender is ADMIN (only ADMIN can view users_dashboard)
-      db.query("Select * from don", (err, results, fields) => {
+app.get("/listetransactions", async(req,res) => {
+ 
+      db.query("Select * from transactions", (err, results, fields) => {
         if (err) throw err;
         if (results.length === 0) res.json();
         else res.json(results);
       
       });
-    } else {
-      return res.sendStatus(403);
-    }
-  }
+    
+})
 
 
+app.get("/tridatetran", async(req,res) => {
+ 
+  db.query("select * from transactions order by createdat asc", (err, results, fields) => {
+    if (err) throw err;
+    if (results.length === 0) res.json();
+    else res.json(results);
+  
+  });
 
 })
+
+
+app.get("/tricodeoptran", async(req,res) => {
+ 
+  db.query("select * from transactions order by code_op asc", (err, results, fields) => {
+    if (err) throw err;
+    if (results.length === 0) res.json();
+    else res.json(results);
+  
+  });
+
+})
+
+app.get("/triccptran", async(req,res) => {
+ 
+  db.query("select * from transactions order  by ccp asc ", (err, results, fields) => {
+    if (err) throw err;
+    if (results.length === 0) res.json();
+    else res.json(results);
+  
+  });
+
+})
+
+app.get("/trinomtran", async(req,res) => {
+ 
+  db.query("select * from transactions order by nom asc", (err, results, fields) => {
+    if (err) throw err;
+    if (results.length === 0) res.json();
+    else res.json(results);
+  
+  });
+
+})
+
+
+app.get("/triemailtran", async(req,res) => {
+ 
+  db.query("select * from transactions order by email asc", (err, results, fields) => {
+    if (err) throw err;
+    if (results.length === 0) res.json();
+    else res.json(results);
+  
+  });
+
+})
+
+app.get("/getevenementbyid",async(req,res)=>{
+  const id = req.headers.event_id;
+  if(id==undefined){
+    return;
+  }
+  const [rows,fields] = await db
+  .promise()
+  .execute("select * from events where id = ?",[id]);
+  return res.json(rows);
+})
+app.get("/getevenementsbyemail", async(req,res)=>{
+
+ const [rows,fields ] = await db
+ .promise()
+ .execute("Select event_id from participant where  email=?",[req.headers.email]);
+ return rows
+
+}
+)
+
+app.get("/getevenementsbyid", async(req,res)=>{
+
+  const [rows,fields ] = await db
+  .promise()
+  .execute("Select  from events where  id=?",[req.headers.event_id]);
+  return rows
+ 
+ }
+ )
 
 app.get("/getphotobyemail", async (req, res) => {
   try {
@@ -237,7 +302,6 @@ app.get("/getphotobyemail", async (req, res) => {
     const [rows2, fields2] = await db
       .promise()
       .execute("SELECT data from photos  WHERE id=?", [rows1[0].photo]);
-      console.log(rows2[0].data);
     const url = `https://res.cloudinary.com/dsi1up4rk/image/upload/v1683021792/Photos_membres/${rows2[0].data}.jpg`;
     // send response
     res.json({ url: url });
@@ -270,13 +334,14 @@ app.get("/getphotobytitle", async (req, res) => {
   }
 });
 
+
+
+
 app.get("/getuser", async (req, res) => {
   // Decode the JWT token
   const authHeader = req.headers.authorization;
-  console.log(authHeader);
   const token = authHeader && authHeader.split(" ")[1];
   const email = jwtDecode(token).user;
-  console.log(email);
 
   const [rows, fields] = await db
     .promise()
@@ -297,12 +362,11 @@ app.get("/getparticipant", async (req, res) => {
       if (err) return res.sendStatus(403);
       req.user = user;
     });
-    const id = req.headers["id"]; // blog id to delete
-    console.log(id)
+    const email = req.headers["email"]; // blog id to delete
+
     const [rows,fields] = await db
     .promise()
-    .execute("select *  from participant where id = ?", [id]);
-    console.log(rows[0])
+    .execute("select *  from participant where email = ?", [email]);
     res.json(rows[0])
     
   } catch (err) {
@@ -428,9 +492,7 @@ app.post("/addBlog", async (req, res) => {
     const authorMail = req.body.authorMail;
     const content = req.body.content;
     const title = req.body.title;
-    console.log(authorMail);
-    console.log(content);
-    console.log(title);
+
     await db
       .promise()
       .execute("insert into blogs values (0,?,?,?,?)", [
@@ -765,7 +827,6 @@ app.post("/refuseUser", async (req, res) => {
       return res.sendStatus(403); // FORBIDDEN
     }
     req.user = user;
-    console.log(req.user)
   });
   const [rows, fields] = await db
     .promise()
@@ -776,7 +837,6 @@ app.post("/refuseUser", async (req, res) => {
     // check if ADMIN
     if (rows[0].role === "ADMIN") {
       const emailtorefuse = req.body.email;
-      console.log(req.body.email)
       const [rows2, field] = await db
         .promise()
         .execute("Select * from enattente where email = ? ", [emailtorefuse]);
@@ -807,14 +867,13 @@ app.post("/refuseUser", async (req, res) => {
 //FIND USER INFO BY EMAIL
 app.post("/findByMail", async (req, res) => {
   const email = req.body.email;
-  console.log("trying to find:", email);
+
   const [rows, fields] = await db
     .promise()
     .execute("select * from users where email = ?", [email]);
   if (rows.length == 0) {
     return res.sendStatus(404);
   } else {
-    console.log(rows[0]);
     return res.json(rows[0]);
   }
 });
@@ -981,44 +1040,24 @@ app.post("/archiveEvent", async (req, res) => {
 });
 // ADDING EVENT
 app.post("/addEvent", async (req, res) => {
-  if (req.headers == null) return res.sendStatus(401); // HANDLE NULL HEADER
-  const token = req.headers["authorization"].split(" ")[1];
-  if (token == null) return res.json(401);
-  //VERIFYING TOKEN AND EXTRACTING USER
-  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-    if (err) return res.json(403);
-    if (user == null) return res.json(403);
-    req.user = user;
-  });
-  //CHECK WHETHER USER HAS ADMIN ROLE...
-  try {
-    const [rows, fields] = await db
-      .promise()
-      .execute("select * from users where email =?", [req.user.user]);
-    //CHECK IF USER EXISTS IN DB
-    if (rows.length == 0) {
-      return res.sendStatus(403);
-    } else {
-      if (rows[0].role == "ADMIN") {
         // check if the request sender is ADMIN (only ADMIN is allowed to view waitings_dashboard)
         const title = req.body.title;
         const date = req.body.date;
         const description = req.body.description;
+        const location = req.body.location;
+        const photo = req.body.photo;
+        const archive = 0;
         //IF SO THEN INSERT THE EVENT IN DB
         await db
           .promise()
-          .execute("insert into events values(0,?,?,?)", [
+          .execute("insert into events values(0,?,?,?,?,?,?)", [
             title,
             date,
             description,
+            location,
+            photo,
+            archive
           ]);
-      } else {
-        return res.sendStatus(403);
-      }
-    }
-  } catch (err) {
-    return res.json(400);
-  }
 });
 
 app.get("/trinomuti" ,async(req,res)=> {
@@ -1050,6 +1089,21 @@ app.get("/triquantitestock" ,async(req,res)=> {
   res.json(rows)
 
 })
+//TRI DE PARTICIPANTS PAR NOM
+app.get("/trinomparti" ,async(req,res)=> {
+  const [rows, fields] = await db 
+  .promise()
+  .execute("Select * from participant order by lastname asc")
+  res.json(rows)
+})
+
+//TRI DE PARTICIPANTS PAR Email
+app.get("/triemailparti" ,async(req,res)=> {
+  const [rows, fields] = await db 
+  .promise()
+  .execute("Select * from participant order by email asc")
+  res.json(rows)
+})
 
 
 app.get("/triprenomuti" ,async(req,res)=> {
@@ -1061,8 +1115,9 @@ app.get("/triprenomuti" ,async(req,res)=> {
   res.json(rows)
 
 })
-
+//TRI USERS BY EMAIL
 app.get("/triemailuti" ,async(req,res)=> {
+  //
   const [rows, fields] = await db 
   .promise()
   .execute("Select * from users order by email asc")
@@ -1157,7 +1212,6 @@ app.post("/uploadphoto", upload.single("photo"), async (req, res) => {
     });
     const public_id = result.url.split("/").pop().split(".jpg");
     const email = jwtDecode(req.headers.authorization).user;
-    console.log(email)
     // save URL to MySQL database
      await db
       .promise()
@@ -1199,7 +1253,6 @@ app.post("/forgot", async (req, res) => {
     };
     const token = jwt.sign(payload, secret, { expiresIn: "15m" });
     const link = `${rows[0].id}/${token}`;
-    console.log("Link : ", link);
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
     const msg = {
       to: {
@@ -1210,7 +1263,7 @@ app.post("/forgot", async (req, res) => {
         email: process.env.EMAIL, // TODO: noreply mail sender
         name: "Fondation Coeur Espoir",
       },
-      templateId: "d-e72e12d4e71b4d24893043d45249a8aa", // template id: got from sendgrid account
+      templateId: "d-b8a949afaeff4054affa4ca0b290047f", // template id: got from sendgrid account
       dynamicTemplateData: {
         name: rows[0].firstname, // showing : HELLO {{firstname}} in the template (GO TO TEMPLATE IN SENDGRID)
         redirect: link,
@@ -1281,7 +1334,7 @@ app.get("/reset_password/:id/:token", async (req, res) => {
     }
   }
 });
-
+//MIS A JOUR USER
 app.post("/updateuser", async (req, res) => {
   const token = req.headers["authorization"].split(" ")[1];
   if (token == null) return res.sendStatus(401);
@@ -1304,44 +1357,20 @@ app.post("/updateuser", async (req, res) => {
   const email = req.body.email ;
   const phone=req.body.phone;
   const departement = req.body.departement ;
-
-
  await db 
   .promise()
   .execute("UPDATE  users  set firstname=? , lastname=?  , phone=? , departement=? where email = ?",[prenom,nom,phone,departement,email]);
   res.send(200); 
-
-
 });
-
+//MIS A JOUR DE PARTICIPANT
 app.post("/updateparticipant", async (req, res) => {
-  const token = req.headers["authorization"].split(" ")[1];
-  if (token == null) return res.sendStatus(401);
-  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-    if (err) return res.sendStatus(403);
-    if (user == null) {
-      return res.sendStatus(403);
-    }
-
-  });
- const [rows, fields] = await db
-    .promise()
-    .execute("select * from users where email =?", [jwtDecode(token).user]);
-  if (rows.length === 0) {
-    return res.sendStatus(403);
-}
-
-console.log(req.body)
-  const id = req.body.id ;
   const nom = req.body.nom ;
   const email = req.body.email ;
   const phone=req.body.phone;
-  const prenom="Amine"
-
-
+  const id = req.body.id
  await db 
   .promise()
-  .execute("UPDATE  participant  SET firstname=? , lastname=?  , email = ? , phone=?  where id = ?",[prenom,nom,email,phone,id]);
+  .execute("UPDATE  participant  SET  lastname=?  , email = ? , phone=?  where id = ?",[nom,email,phone,id]);
   res.send(200); 
 
 
@@ -1359,14 +1388,12 @@ app.post("/reset_password", async (req, res) => {
   } else {
     //CHANGING PASSWORD
     const hashedPassword = await bcrypt.hash(newPassword, 10);
-    console.log("updating password for user with id =", id);
     await db
       .promise()
       .execute("update users set password = ? where id = ?", [
         hashedPassword,
         id,
       ]);
-    console.log("Password update successfully");
     return res.sendStatus(200);
   }
 });
@@ -1417,7 +1444,6 @@ app.post("/ajouterautre", async (req, res) => {
       contenu,
       description,
     ]);
-  console.log("Ajout avec succes");
   return res.sendStatus(200);
 });
 //SATISFAIRE

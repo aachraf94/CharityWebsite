@@ -47,12 +47,7 @@ const BesoinsList = ({ besoins }) => {
                   >
                     Faites Une Donation
                   </Link>
-                  <button
-                    style={{ backgroundColor: "#2E3840" }}
-                    className="font-extrabold  cart-btn flex transition duration-500 ease-in-out px-2 py-2 w-24 self-center ml-[30%]"
-                  >
-                    Voir Plus
-                  </button>
+                  
                 </div>
               </div>
             </div>
@@ -79,12 +74,7 @@ const BesoinsList = ({ besoins }) => {
                   >
                     Faites Une Donation
                   </Link>{" "}
-                  <button
-                    style={{ backgroundColor: "#2E3840" }}
-                    className="font-extrabold  cart-btn flex transition duration-500 ease-in-out px-2 py-2 w-24 self-center ml-[30%]"
-                  >
-                    Voir Plus
-                  </button>
+               
                 </div>
               </div>
               <div className="flex justify-end w-[40%] rounded mb-12 px-4">

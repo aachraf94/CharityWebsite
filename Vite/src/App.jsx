@@ -33,7 +33,10 @@ import Feedback from "./Feedback";
 import ModifierParticipant from "./assets/ModifierParticipant";
 import BlogsTous from "./assets/Blogs/BlogTous";
 import Dashboard from "./assets/dashboards/Dashboard"
-
+import PageNotFound from "./assets/NotFoundPage"
+import AjouterEvent from "./assets/Evenements/AjouterEvent";
+import Description from "./assets/Evenements/DescriptionEvenement"
+import Help from "./Help";
 
 
 function App() {
@@ -45,7 +48,7 @@ function App() {
         email: jwt_decode(localStorage.getItem("token")).user,
       };
       api.post("/getrole", data).then((res) => setRole(res.data.role));
-      } catch (err) {
+    } catch (err) {
       setRole("visitor");
     }
   }, []);
@@ -57,27 +60,28 @@ function App() {
             path="/"
             element={
               <>
-              <NavbarMenu role={role} />
+                <NavbarMenu role={role} />
                 <HP1user />
-                <Feedback/>
+                <Feedback />
                 <Footer />
               </>
             }
           />
-          <Route path="/tousBlogs" element={<><NavbarMenu role={role} /><BlogsTous/><Footer /></>}/>
-          <Route path="/Blogs" element={<><NavbarMenu role={role} /><Blogs role={role}/></>}/>
-         <Route path="/login" element={<Login role={role} />} />
+          <Route path="/tousBlogs" element={<><NavbarMenu role={role} /><BlogsTous /><Footer /></>} />
+          <Route path="/Blogs" element={<><NavbarMenu role={role} /><Blogs role={role} /></>} />
+          <Route path="/login" element={<Login role={role} />} />
           <Route path="/Rejoignez" element={<Register role={role} />} />
-          <Route path="/choice" element={<Choice  role={role}/>} />
-          <Route path="/don" element={<Don role={role}/>} />
+          <Route path="/choice" element={<Choice role={role} />} />
+          <Route path="/don" element={<Don role={role} />} />
           <Route path="/deconnexion" element={<Deconnexion />} />
           <Route path="/utilisateurs" element={<Utilisateurs />} />
           <Route path="/stock" element={<Stock />} />
           <Route path="/participants" element={<Participants />} />
-          <Route path="/demandes" element={<><DemandesList  /><NavbarMenu role={role} /><Footer /></>} />
-          <Route path="/modifiercompte2" element={<><ModifierCompte2  /></>} />
-          <Route path="/besoin" element={<><Besoin role={role}  /></>} />
-          <Route path="/participant" element={<ModifierParticipant/>} />
+          <Route path="/demandes" element={<><DemandesList /><NavbarMenu role={role} /><Footer /></>} />
+          <Route path="/modifiercompte2" element={<><ModifierCompte2 /></>} />
+          <Route path="/besoin" element={<><Besoin role={role} /></>} />
+          <Route path="/participant" element={<ModifierParticipant />} />
+          <Route path="/description" element={<Description />} />
 
           <Route
             path="/Evenements"
@@ -94,7 +98,8 @@ function App() {
           <Route path="/forgot" element={<Forgot />} />
           <Route path="/ajouterbesoin" element={<AjouterBesoin />} />
           <Route path="/ajouterblog" element={<AjouterBlog role={role} />} />
-          <Route path="/modifierprofil" element={<ModifierProfil />} />
+          <Route path="/AjouterEvent" element={<AjouterEvent role={role} />} />
+          <Route path="/modifierprofil" element={<><ModifierProfil /></>} />
           <Route path="/transactions" element={<Transactions />} />
           <Route path="/necessiteux" element={<Necessiteux />} />
           <Route path="/modifierutilisateur" element={<ModifierUtilisateur />} />
@@ -116,11 +121,13 @@ function App() {
               </>
             }
           />
+          <Route path="" />
+          <Route path="/Help" element={<><NavbarMenu role={role}/><Help /><Footer/></>} />
           <Route
             path="/dashboard"
             element={
               <>
-                <Dashboard />
+                <Dashboard role={role} />
               </>
             }
           />
@@ -134,7 +141,7 @@ function App() {
               </>
             }
           />
-          <Route path="/*" element={<p>Page not Found</p>} />
+          <Route path="/*" element={<PageNotFound />} />
         </Routes>
       </Router>
     </>

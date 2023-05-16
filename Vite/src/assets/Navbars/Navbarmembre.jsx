@@ -30,7 +30,6 @@ const Navbarmembre = () => {
   });
 
   },[]);
-  console.log(url)
 
     const handleLogout = async () => {
      
@@ -94,7 +93,7 @@ const Navbarmembre = () => {
     }else{
       menu2.classList.add('hidden');
     }}} className="px-4 cursor-pointer flex flex-row gap-1 justify-between  md:hidden " id="burger">
-        <svg className="w-8 bg-red-300 rounded-xl ml-0 hover:shadow hover:bg-black transition duration-500 ease-in-out" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" >
+        <svg className="w-8 bg-[#e57373] rounded-xl ml-0 hover:shadow hover:bg-black transition duration-500 ease-in-out" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" >
           <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
         </svg> 
       </div>

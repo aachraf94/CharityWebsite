@@ -2,7 +2,6 @@ import Logo from "../FrontAssets/images1/LOGO.png";
 import { Link } from "react-router-dom";
 const Navbar = () => {
   const scrollToBottom = () => {
-    console.log('trrtrt');
     window.scrollTo({
       top: 99999,
       left: 99999,
@@ -96,7 +95,7 @@ const Navbar = () => {
         id="burger"
       >
         <svg
-          className="w-8 bg-red-300 rounded-xl ml-0 hover:shadow hover:bg-black transition duration-500 ease-in-out"
+          className="w-8 bg-[#e57373] rounded-xl ml-0 hover:shadow hover:bg-black transition duration-500 ease-in-out"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"

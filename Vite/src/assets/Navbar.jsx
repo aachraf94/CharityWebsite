@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { api } from "../utils/api";
 
 function NavbarMenu({ role }) {
-  console.log("Role nav: ",role);
   if (role === "ADMIN") return <Navbaradmin />;
   else if (role === "MEMBRE") return <Navbarmembre />;
   else return <Nav />

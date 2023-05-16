@@ -26,7 +26,6 @@ function Login() {
         axios.post("http://localhost:3030/login", values)
         .then((res) => {
           localStorage.setItem("token", res.data.accessToken);
-          console.log("token: ",localStorage.getItem("token"));
           window.location.href="/";
         })
         .catch((err) => {
@@ -94,6 +93,7 @@ function Login() {
                   required
                   values={formik.values.password}
                   onChange={formik.handleChange}
+                  
                 />
                 <span className="Email absolute bottom-4 left-7 text-gray-400 text-sm duration-500 pointer-events-none">
                   Mot de passe
@@ -105,6 +105,7 @@ function Login() {
                 <button
                   className="absolute top-20 right-5 p-2"
                   onClick={()=>handleShowPassword()}
+                  type="button"
                 >
                   {showPassword ? (
                     <FaEyeSlash className="h-6 w-6 text-gray-500" />

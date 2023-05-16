@@ -25,7 +25,7 @@ const Afficherprofil = ({profils,role}) => {
 
 
     return ( 
-        <div className='flex flex-row justify-center'>
+        <div className='flex flex-row justify-center mb-8'>
         {profils.map(profil => (
         <div className="profil-preview  flex flex-col justify-center" key={profil.id} >
             <div className='w-full flex justify-center'>
@@ -43,6 +43,8 @@ const Afficherprofil = ({profils,role}) => {
           <h2 className='text-4xl p-6 underline underline-offset-8'>Prenom  : </h2>
           <h2 className='text-4xl p-6 underline underline-offset-8'>Role  : </h2>
           <h2 className='text-4xl p-6 underline underline-offset-8'>Departement  : </h2>
+          <h2 className='text-4xl p-6 underline underline-offset-8'>Evenements  : </h2>
+          <h2 className='text-4xl p-6 underline underline-offset-8'>Blogs : </h2>
           </div>
 
           <div className='flexflex-col justify-end mb-24'>
@@ -50,6 +52,8 @@ const Afficherprofil = ({profils,role}) => {
           <h2 className='text-4xl font-black p-6'>{ profil.prenom }</h2>
           <h2 className='text-4xl font-black p-6'>{ profil.role }</h2> 
           <h2 className='text-4xl font-black p-6'>{ profil.departement }</h2>
+          <h2 className='text-4xl font-black p-6'>{ profil.evenements }</h2> 
+          <h2 className='text-4xl font-black p-6'>{ profil.blogs }</h2>
           </div>
           </div>
         </div>

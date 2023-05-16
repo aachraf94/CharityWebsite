@@ -19,7 +19,6 @@ const Reset = () => {
   };
 
   const { id, token } = useParams();
-  console.log(`id:${id} , token:${token}`);
   const navigate = useNavigate("");
   const formik = useFormik({
     initialValues: {

@@ -10,22 +10,8 @@ import { useEffect, useState } from "react";
 
 const EvenementsList = ({ evenements }) => {
   const navigate = useNavigate("/");
-  const archiver = (id) => {
-    console.log("Archiving: ",id);
-    const data = {
-      id: id,
-    };
-    api.post("/archiveEvent", data).catch((err) => {
-      alert("Erreur!");
-      navigate("/");
-    });
-    alert("Bien archivées");
-    navigate("/");
-  };
   const [inscrire, setInscrire] = useState(false);
-
-
-
+  const[selectedEventId,setSelectedEventId] = useState(0);
   return (
     <div className="evenements-list">
       {evenements.map((evenement) => (
@@ -46,16 +32,19 @@ const EvenementsList = ({ evenements }) => {
             <p className="font-bold py-2 flex"><img src={placeicon} alt="" className='px-3'  />{evenement.location}</p>
             <p className="font-black">{evenement.description}</p>
             <div className='flex justify-center mt-6'>
-            <button  style={{ backgroundColor: '#2E3840' }}
-              className="font-extrabold  cart-btn flex transition duration-500 ease-in-out px-2 py-2 w-24 self-center ml-[30%]">Voir Plus</button>
+           
                                 <button
-                      onClick={() => setInscrire(!inscrire)}
+                                
+                    onClick={()=>{
+                      setInscrire(!inscrire)
+                       setSelectedEventId(evenement.id)}
+                      }
                       style={{ backgroundColor: "#2E3840" }}
                       className="font-extrabold  cart-btn flex r transition duration-500 ease-in-out px-2 py-2 w-24 self-center ml-[30%]"
                     >
                       Inscrire
                     </button>
-                    {inscrire && <Inscription event_id={evenement.id}/>}
+                    {inscrire && <Inscription event_id={selectedEventId}/>}
               </div>
           </div>
           </div>): null}
@@ -70,10 +59,16 @@ const EvenementsList = ({ evenements }) => {
             <p className="font-bold py-2 flex"><img src={placeicon} alt="" className='px-3'  />{evenement.location}</p>
             <p className="font-black">{evenement.description}</p>
             <div className='flex justify-center mt-6'>
-            <button  style={{ backgroundColor: '#2E3840' }}
-              className="font-extrabold  cart-btn flex transition duration-500 ease-in-out px-2 py-2 w-24 self-center ml-[30%]">Voir Plus</button>
-            <button  style={{ backgroundColor: '#2E3840' }}
+           
+            <button  
+            
+            onClick={()=>{
+              setInscrire(!inscrire)
+               setSelectedEventId(evenement.id)}
+              }
+            style={{ backgroundColor: '#2E3840' }}
               className="font-extrabold  cart-btn flex transition duration-500 ease-in-out px-2 py-2 w-24 self-center ml-[30%]">Inscrire</button>
+              {inscrire && <Inscription event_id={selectedEventId}/>}
               </div>
           </div>
           <div className="flex justify-end w-[100%] rounded mb-12 px-4">
