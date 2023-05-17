@@ -1,4 +1,4 @@
-<p align="center"> <img src="https://i.ibb.co/7jXGRDf/Logo-1.png" height="200" /> </p>
+<p align="center"> <img src="https://i.ibb.co/7jXGRDf/Logo-1.png" /> </p>
 
 ## Projet 2CP -Site web pour une association caritative-
 
@@ -7,7 +7,7 @@
 ## Utilisé par
 
 Ce projet est utilisé par :
--Le site web peut être utilisé par toute personne intéressée par la cause caritative soutenue par la Fondation Cœur Espoir. Il est ouvert à tous, qu'il s'agisse de bénévoles, de nécessiteux, de donateurs potentiels, de membres de l'association ou de toute personne souhaitant en savoir plus sur les actions menées par la Fondation et participer à sa mission philanthropique.
+-toute personne intéressée par la cause caritative soutenue par la Fondation Cœur Espoir. Il est ouvert à tous, qu'il s'agisse de bénévoles, de nécessiteux, de donateurs potentiels, de membres de l'association ou de toute personne souhaitant en savoir plus sur les actions menées par la Fondation et participer à sa mission philanthropique.
 
 ## Auteurs
 
