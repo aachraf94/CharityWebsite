@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://ibb.co/ZGVhYrjg"/>
+<img src="https://ibb.co/ZGVhYrj" height="200" />
 </p>
 
 ## Projet 2CP -Site web pour une association caritative-
