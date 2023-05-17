@@ -110,12 +110,12 @@ const Navbarmembre = () => {
     }} className=" text-black hover:text-gray-300 underline underline-offset-8 opacity-90">Modifier profil</Link>
         </li>
         <li className="mr-4">
-            <Link to="#" onClick={()=>{const profila = document.querySelector('#profila');
+            <Link to="/AjouterEvent" onClick={()=>{const profila = document.querySelector('#profila');
       profila.classList.add('hidden');
     }} className=" text-black hover:text-gray-300 underline underline-offset-8 opacity-90">Ajouter Evenement</Link>
         </li>
         <li className="mr-4">
-            <Link to="#" onClick={()=>{const profila = document.querySelector('#profila');
+            <Link to="/AjouterBesoin" onClick={()=>{const profila = document.querySelector('#profila');
       profila.classList.add('hidden');
     }} className=" text-black hover:text-gray-300 underline underline-offset-8 opacity-90">Ajouter Besoin</Link>
         </li>
@@ -125,7 +125,7 @@ const Navbarmembre = () => {
     }} className=" text-black hover:text-gray-300 underline underline-offset-8 opacity-90">Ajouter Blog</Link>
         </li>
         <li className="mr-4">
-            <Link to="#" onClick={()=>{const profila = document.querySelector('#profila');
+            <Link to="/AjouterBesoin" onClick={()=>{const profila = document.querySelector('#profila');
       profila.classList.add('hidden');
     }} className=" text-black hover:text-gray-300 underline underline-offset-8 opacity-90">Ajouter Beneficiere</Link>
         </li>
