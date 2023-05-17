@@ -34,6 +34,30 @@ const Participants = () => {
     setShowPopup2(true);
   };
 
+const [participantswithevents,setParticipantswithevents] = useState([]);
+
+const [evenements,setEvenements] = useState([]);
+const fetchEventbyEmail = (participant) => {
+  return fetch('http://localhost:3030/getparticipantevent', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('token')}` ,
+      "email" : participant.email
+    }
+  })
+  .then(response => response.json())
+      .then(data => {
+        return { ...participant, evenements: data };
+      })
+      .catch(error => {
+        console.error(error);
+        return { ...user, evenements: null };
+      });
+    }
+
+
+
   useEffect(() => {
 
     fetch("http://localhost:3030/listeparticipants", {
@@ -44,9 +68,11 @@ const Participants = () => {
       },
     })
       .then(response => response.json())
-      .then(data => {
-        setParticipants(data)
-      })
+      .then(data=> {const promises = data.map(participant => fetchEventbyEmail(participant));
+        
+      Promise.all(promises).then(participantswithevents => {
+        setParticipantswithevents(participantswithevents);
+      })})
   }, []);
 
   const handleNom = async () => {
@@ -108,7 +134,6 @@ const Participants = () => {
   };
 
 
-
   return (
     <div>
       <div className="flex flex-row bg-[#F5F5F5]">
@@ -161,7 +186,7 @@ const Participants = () => {
             <h2 className="text-white font-semibold text-md mb-2 w-[20%]" >Evenement</h2>
           </div>
           <div>
-            {participants.length > 0 ? participants.map(participant => (
+            {participantswithevents.length > 0 ? participantswithevents.map(participant => (
               <div key={participant.id} className="bg-white py-2 ml-8  mr-4 flex flex-row justify-between h-12 items-center -mt-2 mb-2 border-r-2 border-b-2 border-l-2 ">
                 <div className="flex flex-row justify-between w-[8%]">
                   <input type="checkbox" onChange={(event) => handleCheckboxChange(event, participant)} className="ml-4" ></input>
@@ -173,7 +198,14 @@ const Participants = () => {
                   <h2 className="text-[#2E3840] font-semibold text-md ">{participant.email}</h2>
                 </div>
                 <h2 className="text-[#2E3840] font-semibold text-md w-[20%] hidden md:block ">{participant.phone}</h2>
-                <h2 className="text-[#2E3840] font-semibold text-md w-[20%]">{participant.event_id}</h2>
+                <h2 className="text-[#2E3840] font-semibold text-md w-[20%]">
+                {participant.evenements.map((event, index) => (
+                  <span className={index !== 0 ? 'ml-4 ' : ''}>
+                    {event.title} {index !== participant.evenements.length - 1 ? " ," : ""}
+                  </span>
+                ))}
+</h2>
+
               </div>
             )) : <p></p>}
           </div>

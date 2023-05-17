@@ -19,7 +19,8 @@ const { LocalStorage } = require("node-localstorage");
 const localStorage = new LocalStorage("./scratch");
 const jwtDecode = require("jwt-decode");
 const cookieParser = require("cookie-parser");
-const bodyParser = require("body-parser")
+const bodyParser = require("body-parser");
+const { error } = require("console");
 
 const port = process.env.PORT;
 app.use(bodyParser.json({ limit: '10mb' }));
@@ -54,40 +55,39 @@ const db = mysql.createPool({
 });
 app.listen(port, () => console.log(`Server Started on port ${port}...`));
 
- // Accept to parse every json we send to the body
 
 //GET BLOGS
 app.get("/getBlogs", async (req, res) => {
-  const [rows, fields] = await db.promise().execute("select * from blogs");
+  const [rows, fields] = await db.promise().execute("select * from blogs"); //selectionner tous les blogs de la bdd
 
-  return res.send(rows);
+  return res.send(rows); // les renvoyer sous forme d objet
 });
 
-
+// Avoir le role de notre utilisateur 
  app.post("/getrole", async (req, res) => {
-  if (req.body.email === undefined) {
-    return res.send({ role: "visitor" });
+  if (req.body.email === undefined) { // s'il n'y a pas d'email dans la requete alors
+    return res.send({ role: "visitor" }); // c'est un visiteur
   }
   const email = req.body.email;
   const [rows, fields] = await db
     .promise()
-    .execute("select * from users where email = ?", [email]);
+    .execute("select * from users where email = ?", [email]); // sinon on cherche dans la bdd son role
   if (rows.length == 0) return res.sendStatus(404);
 
-  res.send({ role : rows[0].role }); // send the userrole variable as a JSON object
+  res.send({ role : rows[0].role }); // le renvoyer en tant que objet
 });
-// LOGIN API (AUTHENTICATE USER)
+// LOGIN API (AUTHENTICATION UTILISATEUR)
 app.post("/login", async (req, res) => {
   //getting info from the body
-  const user = req.body.email;
-  const password = req.body.password;
+  const user = req.body.email;   //recuperer le mot de passe et l'email
+  const password = req.body.password;  
 
   const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
-  //TODO:CHECK IF THE REFRESH TOKEN ALREADY EXISTS IN THE DB , AND IF SO THEN DON'T LOGIN ONCE AGAIN
+  
   db.getConnection(async (err, connection) => {
     if (err) throw err;
 
-    //checking whether email exists in the db
+    // verifier si l'email existe dans la bdd 
     const [rows, fields] = await db
       .promise()
       .execute("Select * from users where email = ?", [user]);
@@ -95,7 +95,7 @@ app.post("/login", async (req, res) => {
 
       res.sendStatus(404);
     } else {
-      //comparing the passwords using bcrypt.compare()
+      //comparer les mots de passe avec  bcrypt.compare()
       const hashedPassword = rows[0].password;
       await bcrypt.compare(
         password,
@@ -103,8 +103,8 @@ app.post("/login", async (req, res) => {
         async function (err, res2) {
           if (err) throw err;
           if (res2) {
-            const accessToken = generateAccessToken({ user: user });
-            //refreshTokens.push(refreshToken);
+            const accessToken = generateAccessToken({ user: user }); // le token qui permet d'acceder a des pages specifiques dans notre site web
+           
             await db
               .promise()
               .execute("insert into refresh_token values (0,?)", [
@@ -121,7 +121,7 @@ app.post("/login", async (req, res) => {
   });
 });
 
-//CREATE NEW ACCESS TOKEN FROM REFRESH TOKEN
+//Creer un access token
 app.post("/token", async (req, res) => {
   const refreshToken = req.body.refreshToken;
   if (refreshToken == null) return res.sendStatus(401);
@@ -137,7 +137,7 @@ app.post("/token", async (req, res) => {
     res.json({ accessToken: accessToken });
   });
 });
-//SHOW PROFILE INFORMATION
+//SRecuperer les donnees d un membre
 app.get("/profile", async (req, res) => {
   const token = req.headers["authorization"].split(" ")[1];
   if (token == null) return res.sendStatus(401);
@@ -157,7 +157,6 @@ app.get("/profile", async (req, res) => {
   return res.json(rows);
 });
 
-//GET THE ROLE OF THE USER BASED ON THE MAIL
 app.post("/getrole", async (req, res) => {
   if (req.body.email === undefined) {
     return res.json({ role: "visitor" });
@@ -171,7 +170,7 @@ app.post("/getrole", async (req, res) => {
   res.json({ role: rows[0].role }); // send the userrole variable as a JSON object
 });
 
-
+//Recuperer la photo de profil
 app.get("/getphoto", async (req, res) => {
   try {
     const authHeader = req.headers.authorization;
@@ -185,13 +184,16 @@ app.get("/getphoto", async (req, res) => {
     const [rows2, fields2] = await db
       .promise()
       .execute("SELECT data from photos  WHERE id=?", [rows1[0].photo]);
-    const url = `https://res.cloudinary.com/dsi1up4rk/image/upload/v1683021792/Photos_membres/${rows2[0].data}.jpg`;
+    const url = `https://res.cloudinary.com/dsi1up4rk/image/upload/v1683021792/Photos_membres/${rows2[0].data}`;
     // send response
     res.json({ url: url });
   } catch (error) {
     console.error(error);
   }
 });
+
+
+//Recuperer la liste des transactions
 
 app.get("/listetransactions", async(req,res) => {
  
@@ -204,7 +206,7 @@ app.get("/listetransactions", async(req,res) => {
     
 })
 
-
+// trier les transactions par date
 app.get("/tridatetran", async(req,res) => {
  
   db.query("select * from transactions order by createdat asc", (err, results, fields) => {
@@ -216,7 +218,7 @@ app.get("/tridatetran", async(req,res) => {
 
 })
 
-
+// trier les transactions par codeoperation
 app.get("/tricodeoptran", async(req,res) => {
  
   db.query("select * from transactions order by code_op asc", (err, results, fields) => {
@@ -227,6 +229,8 @@ app.get("/tricodeoptran", async(req,res) => {
   });
 
 })
+
+// trier les transactions par ccp
 
 app.get("/triccptran", async(req,res) => {
  
@@ -239,6 +243,9 @@ app.get("/triccptran", async(req,res) => {
 
 })
 
+// trier les transactions par nom
+
+
 app.get("/trinomtran", async(req,res) => {
  
   db.query("select * from transactions order by nom asc", (err, results, fields) => {
@@ -250,6 +257,7 @@ app.get("/trinomtran", async(req,res) => {
 
 })
 
+// trier les transactions par email
 
 app.get("/triemailtran", async(req,res) => {
  
@@ -262,9 +270,12 @@ app.get("/triemailtran", async(req,res) => {
 
 })
 
+
+// Recuperer un evenement selon son id
+
 app.get("/getevenementbyid",async(req,res)=>{
   const id = req.headers.event_id;
-  if(id==undefined){
+  if(id===undefined){
     return;
   }
   const [rows,fields] = await db
@@ -274,13 +285,37 @@ app.get("/getevenementbyid",async(req,res)=>{
 })
 app.get("/getevenementsbyemail", async(req,res)=>{
 
- const [rows,fields ] = await db
+ const   email = jwtDecode(req.headers.authorization).user ;
+ const [rows,fields ] = await db 
  .promise()
- .execute("Select event_id from participant where  email=?",[req.headers.email]);
- return rows
+ .execute("Select event_id from participant where  email=?",[email]);
+const id = rows.map((row)=>row.event_id)
+const idList = id.join(', ');
+if (idList.length >0 ){
+ const [rows2,fields2 ] = await db 
+ .promise()
+ .execute(`Select title from  charity.events where id in (${idList})`)
 
+ return res.json(rows2)
+}
+return null
 }
 )
+
+//Recuperer un blog d apres son email
+app.get("/getblogsbyemail", async(req,res)=>{
+
+  const   email = jwtDecode(req.headers.authorization).user ;
+  const [rows,fields ] = await db 
+  .promise()
+  .execute("Select title from blogs where  authorMail=?",[email]);
+ 
+  return res.json(rows)
+ 
+ }
+ )
+
+//Recuperer un evenement d apres son id
 
 app.get("/getevenementsbyid", async(req,res)=>{
 
@@ -292,6 +327,28 @@ app.get("/getevenementsbyid", async(req,res)=>{
  }
  )
 
+//Recuperer les evenements d un participant
+
+ app.get("/getparticipantevent", async(req,res)=>{
+
+  const   email = req.headers.email ;
+  const [rows,fields ] = await db 
+  .promise()
+  .execute("Select event_id from participant where  email=?",[email]);
+ const id = rows.map((row)=>row.event_id)
+ const idList = id.join(', ');
+ if (idList.length >0 ){
+  const [rows2,fields2 ] = await db 
+  .promise()
+  .execute(`Select title from  charity.events where id in (${idList})`)
+  return res.json(rows2)
+ }
+ return null
+ }
+ )
+
+ //Recuperer la photo par email 
+
 app.get("/getphotobyemail", async (req, res) => {
   try {
 
@@ -302,7 +359,7 @@ app.get("/getphotobyemail", async (req, res) => {
     const [rows2, fields2] = await db
       .promise()
       .execute("SELECT data from photos  WHERE id=?", [rows1[0].photo]);
-    const url = `https://res.cloudinary.com/dsi1up4rk/image/upload/v1683021792/Photos_membres/${rows2[0].data}.jpg`;
+    const url = `https://res.cloudinary.com/dsi1up4rk/image/upload/v1683021792/Photos_membres/${rows2[0].data}`;
     // send response
     res.json({ url: url });
 
@@ -311,7 +368,7 @@ app.get("/getphotobyemail", async (req, res) => {
   }
 });
 
-
+//recuperer la photo d un evenement
 app.get("/getphotobytitle", async (req, res) => {
   try {
 
@@ -324,7 +381,7 @@ app.get("/getphotobytitle", async (req, res) => {
     const [rows2, fields2] = await db
       .promise()
       .execute("SELECT data from photos  WHERE id=?", [rows1[0].photo]);
-    const url = `https://res.cloudinary.com/dsi1up4rk/image/upload/v1684161985/Photos_evenements/${rows2[0].data}.jpg`;
+    const url = `https://res.cloudinary.com/dsi1up4rk/image/upload/v1684161985/Photos_evenements/${rows2[0].data}`;
     // send response
     res.json({ url: url });
 
@@ -336,7 +393,7 @@ app.get("/getphotobytitle", async (req, res) => {
 
 
 
-
+//Recuperer les donnees de l utilisateur
 app.get("/getuser", async (req, res) => {
   // Decode the JWT token
   const authHeader = req.headers.authorization;
@@ -352,6 +409,8 @@ app.get("/getuser", async (req, res) => {
    catch {}
 });
 //MODIFY PASSWORD
+
+//Recuperer les donnees d un participant
 
 app.get("/getparticipant", async (req, res) => {
   // Decode the JWT token
@@ -373,6 +432,9 @@ app.get("/getparticipant", async (req, res) => {
     res.sendStatus(403);
   }
 });
+
+
+//Changer  le mot de passe
 app.post("/modifyPassword", async (req, res) => {
   const newpassword = req.body.password;
   const email = req.body.email;
@@ -1039,7 +1101,7 @@ app.post("/archiveEvent", async (req, res) => {
   }
 });
 // ADDING EVENT
-app.post("/addEvent", async (req, res) => {
+app.post("/addEvent", upload.single("photo"),async (req, res) => {
         // check if the request sender is ADMIN (only ADMIN is allowed to view waitings_dashboard)
         const title = req.body.title;
         const date = req.body.date;
@@ -1047,6 +1109,10 @@ app.post("/addEvent", async (req, res) => {
         const location = req.body.location;
         const photo = req.body.photo;
         const archive = 0;
+
+        
+  
+        
         //IF SO THEN INSERT THE EVENT IN DB
         await db
           .promise()
@@ -1058,7 +1124,10 @@ app.post("/addEvent", async (req, res) => {
             photo,
             archive
           ]);
+
+        
 });
+
 
 app.get("/trinomuti" ,async(req,res)=> {
  
@@ -1210,7 +1279,8 @@ app.post("/uploadphoto", upload.single("photo"), async (req, res) => {
     const result = await cloudinary.uploader.upload(req.file.path, {
       folder: "Photos_membres",
     });
-    const public_id = result.url.split("/").pop().split(".jpg");
+    const public_id = result.url.split("/").pop().split(".jpg")
+  
     const email = jwtDecode(req.headers.authorization).user;
     // save URL to MySQL database
      await db
@@ -1233,6 +1303,40 @@ app.post("/uploadphoto", upload.single("photo"), async (req, res) => {
     res.status(500).json({ success: false, message: "Failed to upload photo" });
   }
 });
+
+
+
+app.post("/uploadphotoevent", upload.single("photo"), async (req, res) => {
+  try {
+    // upload photo to Cloudinary
+    const result = await cloudinary.uploader.upload(req.file.path, {
+      folder: "Photos_evenements",
+    });
+    const public_id = result.url.split("/").pop().split(".jpg");
+    const email = jwtDecode(req.headers.authorization).user;
+    const title = req.headers.title ;
+    // save URL to MySQL database
+     await db
+      .promise()
+      .execute("insert into  photos  values(0,?) ", [public_id[0]]);
+
+      const [rows, fields] = await db
+      .promise()
+      .execute("select id from photos where  data=? ", [public_id[0]]);
+
+      await db
+      .promise()
+      .execute("UPDATE events SET photo=? WHERE title=?",[rows[0].id,title]);
+
+    // send response
+    res.json({ success: true, url: result.url });
+  }
+  catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: "Failed to upload photo" });
+  }
+});
+
 
 //SEND THE FORGOT MAIL
 app.post("/forgot", async (req, res) => {
@@ -1474,7 +1578,6 @@ app.get("/triQuantite", async (req, res) => {
 });
 app.get("/satisfaire", async (req, res) => {
   const rows = req.body;
-  console.log(rows[0]);
   return res.sendStatus(200);
 });
 

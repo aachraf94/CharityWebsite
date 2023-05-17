@@ -207,7 +207,7 @@ const Transactions = () => {
                     <div className="flex flex-row justify-start items-center mb-2 w-[20%] hidden lg:inline-flex">
                     <h2 className="text-[#2E3840] font-semibold text-md ">{transaction.email}</h2>
                     </div>
-                    <h2 className="font-semibold text-md mb-2 w-[15%]" style={{ color: transaction.solde.startsWith('+') ? '#2ECC71' : '#F60505' }}>{transaction.quantite}</h2>
+                    <h2 className="font-semibold text-md mb-2 w-[15%]" style={{ color: transaction.quantite.startsWith('+') ? '#2ECC71' : '#F60505' }}>{transaction.quantite}</h2>
                     <h2 className="text-[#2E3840] font-semibold text-md mb-2 w-[12%]" >{transaction.solde}</h2>
                     </div>
                       ))}

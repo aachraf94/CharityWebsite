@@ -56,6 +56,7 @@ const Evenements = ({role}) => {
           });
       }
       
+console.log(eventswithphoto)
 
   if (role === "ADMIN") {    return <EvenementsListadmin evenements={ eventswithphoto } />;
   } else if (role === "MEMBRE") {

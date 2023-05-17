@@ -28,6 +28,8 @@ function ModifierCompte() {
     });
   
     const data = await response.json();
+    
+    window.location.href="/"
   }
     
     
@@ -128,15 +130,15 @@ function ModifierCompte() {
 
                 <div class="flex flex-col 4 justify-center items-center md:flex-row md:justify-center md:items-center p-4 md:p-8 gap-4 md:gap-8 w-full md:w-auto h-auto md:h-71 bg-gray-800 md:bg-transparent shadow-lg md:shadow-none rounded-lg md:rounded-none"></div>
               </div>
-              <Link to="/" >
+             
               <button
                 type="submit"
-                onClick={handleSubmit}
+                onClick={()=>handleSubmit()}
                 className="flex justify-center items-center bg-blue-500 rounded-xl shadow-md py-4 px-8 text-yellow-300 text-xl font-bold uppercase tracking-wide cursor-pointer hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400 w-full sm:w-80 h-14 mt-4 "
               >
                 sauvegarder
               </button>
-              </Link>
+
             </div>
 
         </div>

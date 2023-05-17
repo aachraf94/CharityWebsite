@@ -11,6 +11,9 @@ import dash8 from "../FrontAssets/images1/dash8.svg";
 import notification from "../FrontAssets/images1/notification.svg";
 import search from "../FrontAssets/images1/search.svg";
 import img from "../FrontAssets/images1/Ajouter Un Evenement.png";
+import img1 from "../FrontAssets/images1/event1.png"
+import img2 from "../FrontAssets/images1/event2.png"
+import img3 from "../FrontAssets/images1/event3.png"
 import { RiCloseCircleFill } from "react-icons/ri";
 import Dashboardnavbar from "../dashboardsNavbars/DashboardNavbar";
 import { useEffect, useState } from "react";
@@ -106,13 +109,13 @@ const DashboardNavbar = ({ role }) => {
                 <img src={img} className=" rounded-xl  " alt="Preview" />
               </div>
               <div className="ml-[2%]  w-[20%] ">
-                <img src={img} className=" rounded-xl" alt="Preview" />
+                <img src={img1} className=" rounded-xl" alt="Preview" />
               </div>
               <div className="ml-[2%]  w-[20%] ">
-                <img src={img} className=" rounded-xl" alt="Preview" />
+                <img src={img2} className=" rounded-xl" alt="Preview" />
               </div>
               <div className="ml-[2%]  w-[20%] ">
-                <img src={img} className=" rounded-xl" alt="Preview" />
+                <img src={img3} className=" rounded-xl" alt="Preview" />
               </div>
               <div className="ml-[2%] mr-[4%]  w-[20%] ">
                 <img src={img} className=" rounded-xl" alt="Preview" />

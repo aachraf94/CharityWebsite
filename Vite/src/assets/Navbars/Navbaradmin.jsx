@@ -235,7 +235,7 @@ const Navbaradmin = () => {
           </li>
           <li className="mr-4">
             <Link
-              to="#"
+              to="/ajouterblog"
               onClick={() => {
                 const profila = document.querySelector("#profila");
                 profila.classList.add("hidden");

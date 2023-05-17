@@ -53,7 +53,6 @@ const EvenementsListadmin = ({ evenements }) => {
                   <img
                     src={
                       evenement.photoUrl
-
                     }
                     alt=""
                   />

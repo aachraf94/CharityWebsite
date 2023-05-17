@@ -120,7 +120,7 @@ const Navbarmembre = () => {
     }} className=" text-black hover:text-gray-300 underline underline-offset-8 opacity-90">Ajouter Besoin</Link>
         </li>
         <li className="mr-4">
-            <Link to="#" onClick={()=>{const profila = document.querySelector('#profila');
+            <Link to="/ajouterblog" onClick={()=>{const profila = document.querySelector('#profila');
       profila.classList.add('hidden');
     }} className=" text-black hover:text-gray-300 underline underline-offset-8 opacity-90">Ajouter Blog</Link>
         </li>
