@@ -45,7 +45,7 @@ Ce projet est utilisé par :
 
 ## Guide d’installation
 
-* [Notice d’installation PDF](https://drive.google.com/file/d/1ljEzhcAE6KZKh7BkpRZINAL1dYeTlTK7/view?usp=sharing)
+* [Notice d’installation PDF](https://drive.google.com/file/d/17J-eyQeBiMzGNhOoTtDVaFNQkcMr2Ug_/view?usp=sharing)
 
 
 ## Remerciement
